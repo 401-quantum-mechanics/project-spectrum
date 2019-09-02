@@ -8,7 +8,7 @@ public class UserPost {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  long id;
+  public long id;
   public String idea;
   public String body;
   public Date createdAt;
