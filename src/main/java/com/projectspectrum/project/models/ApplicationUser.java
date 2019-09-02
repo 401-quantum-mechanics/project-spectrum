@@ -32,7 +32,7 @@ public class ApplicationUser implements UserDetails {
 //  Followers and following
   @OneToMany
   @JoinTable(
-    name = "user_follows",
+    name = "userFollows",
               joinColumns = { @JoinColumn(name = "primaryUser")},
               inverseJoinColumns = {@JoinColumn(name = "followedUser")}
   )
@@ -44,7 +44,7 @@ public class ApplicationUser implements UserDetails {
 //  Teams
   @OneToMany
   @JoinTable(
-  name = "team-ups",
+  name = "teamUps",
               joinColumns = { @JoinColumn(name = "primaryUser")},
               inverseJoinColumns = { @JoinColumn(name = "team")}
 )

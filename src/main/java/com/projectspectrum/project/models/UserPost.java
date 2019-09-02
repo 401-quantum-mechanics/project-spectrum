@@ -27,8 +27,6 @@ public class UserPost {
     return this.id;
   }
 
-
-
   public String getBody() {
     return this.body;
   }
