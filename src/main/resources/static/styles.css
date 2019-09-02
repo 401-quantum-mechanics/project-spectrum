@@ -2,3 +2,21 @@
 nav {
     margin-bottom: 50px;
 }
+
+.profile-icon {
+    width: 100%;
+}
+
+.profile-img-col-border {
+    border-right: 1px dotted #ddd;
+    display: flex;
+    align-items: center;
+}
+
+div.page-title {
+    margin-bottom: 40px;
+}
+
+.profile-card-row {
+    margin-bottom: 60px;
+}
