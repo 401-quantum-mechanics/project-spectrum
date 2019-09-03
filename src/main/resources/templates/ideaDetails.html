@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Header Fragment -->
     <div th:replace="fragments/fragments :: head"></div>
@@ -31,24 +31,32 @@
                         <div class="col-sm-6 profile-page-info">
                             <div class="row">
                                 <div class="col">
-                                    <h1>Test User</h1>
+                                    <h1
+                                            th:text="${user.firstName + ' ' + user.lastName}">Test
+                                        User</h1>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <a href="#"><p>test@email.com</p></a>
+                                    <a
+                                            href="#"><p th:text="${user.username}">test@email
+                                        .com</p></a>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <p><span>Ideas: </span><span>10</span></p>
+                                    <p><span>Total Projects Suggested: </span><span
+                                            th:text="${ideas.size()}">
+                                </span></p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <p><span>Followers: </span><span>4</span></p>
+                                    <p><span>Total Team Participation: </span><span>4
+                                </span></p>
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
