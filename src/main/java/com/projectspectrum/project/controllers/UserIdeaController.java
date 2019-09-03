@@ -34,14 +34,18 @@ public class UserIdeaController {
     }
 
     @GetMapping("/ideas")
-    public String getListOfIdeas(Model model){
+    public String getListOfIdeas(Model model, Principal p){
+       ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
+       model.addAttribute("user", applicationUser);
        List<UserIdea> ideasList =  userIdeaRepository.findAll();
        model.addAttribute("ideas", ideasList);
        return "allIdeas";
     }
 
     @GetMapping("/ideaPage/{id}")
-    public String getIdeaDetails(@PathVariable long id, Model model){
+    public String getIdeaDetails(@PathVariable long id, Model model, Principal p){
+        ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
+        model.addAttribute("user", applicationUser);
         UserIdea userIdea = userIdeaRepository.findById(id);
         model.addAttribute("idea_details", userIdea);
         return "IdeaDetails";
