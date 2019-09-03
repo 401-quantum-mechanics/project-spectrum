@@ -29,4 +29,9 @@ public class HomeController {
 
     return "homepage";
   }
+    @GetMapping("/idea")
+  public String getIdeaPage(){
+    return "ideapage";
+    }
+
 }
