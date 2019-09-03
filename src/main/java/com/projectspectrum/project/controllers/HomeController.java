@@ -60,18 +60,4 @@ public class HomeController {
     return "ideaDetails";
   }
 
-
-  @GetMapping("/ideas")
-  public String getAllIdeasPage(Principal p, Model m) {
-    ApplicationUser applicationUser = null;
-
-    if(p!=null){
-      applicationUser = applicationUserRepository.findByUsername(p.getName());
-    }
-    m.addAttribute("user", applicationUser);
-
-
-    return "allIdeas";
-  }
-
 }
