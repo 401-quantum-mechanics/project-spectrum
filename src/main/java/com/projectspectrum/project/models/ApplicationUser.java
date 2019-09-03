@@ -16,54 +16,51 @@ public class ApplicationUser implements UserDetails {
 
   public long id;
   String password;
-  public String username;
   public String firstName;
-  public String email;
-  public ArrayList ideas;
-  public ArrayList teams;
-  public ArrayList comments;
+  public String lastName;
+  public String username;
+
 
 //  Database connections
 
 //  Ideas
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
   List<UserIdea> userIdeaList;
+//  // Comments
+//  @OneToMany(fetch = FetchType.EAGER, mappedBy = "user_commenting")
+//  List<UserComment> userCommentList;
 
-//  Followers and following
-  @OneToMany
-  @JoinTable(
-    name = "userFollows",
-              joinColumns = { @JoinColumn(name = "primaryUser")},
-              inverseJoinColumns = {@JoinColumn(name = "followedUser")}
-  )
-  Set<ApplicationUser> UsersThatIFollow;
-
-  @ManyToMany
-  Set<ApplicationUser> UsersThatFollowMe;
+////  Followers and following
+//  @OneToMany
+//  @JoinTable(
+//    name = "userFollows",
+//              joinColumns = { @JoinColumn(name = "primaryUser")},
+//              inverseJoinColumns = {@JoinColumn(name = "followedUser")}
+//  )
+//  Set<ApplicationUser> UsersThatIFollow;
+//
+//  @ManyToMany
+//  Set<ApplicationUser> UsersThatFollowMe;
 
 //  Teams
-  @OneToMany
-  @JoinTable(
-  name = "teamUps",
-              joinColumns = { @JoinColumn(name = "primaryUser")},
-              inverseJoinColumns = { @JoinColumn(name = "team")}
-)
-  Set<ApplicationUser> TeamsUsersOn;
+//  @OneToMany
+//  @JoinTable(
+//  name = "teamUps",
+//              joinColumns = { @JoinColumn(name = "primaryUser")},
+//              inverseJoinColumns = { @JoinColumn(name = "team")}
+//)
+//  Set<ApplicationUser> TeamsUsersOn;
 
 
 
 //  class constructor
   public ApplicationUser(
-    String password, String username, String firstName, String email, ArrayList ideas, ArrayList following,
-    ArrayList followers, ArrayList teams, ArrayList comments
-                        ) {
+    String password, String firstName, String lastName, String email) {
     this.password  = password;
-    this.username  = username;
-    this.firstName = firstName;
-    this.email     = email;
-    this.ideas     = ideas;
-    this.teams     = teams;
-    this.comments  = comments;
+    this.firstName  = firstName;
+    this.lastName = lastName;
+    this.username     = email;
+
   }
 //  empty constructor
   public ApplicationUser(){};
@@ -87,21 +84,7 @@ public class ApplicationUser implements UserDetails {
     return this.firstName;
   }
 
-  public String getEmail() {
-    return this.email;
-  }
 
-  public ArrayList getIdeas() {
-    return this.ideas;
-  }
-
-  public ArrayList getTeams() {
-    return this.teams;
-  }
-
-  public ArrayList getComments() {
-    return this.comments;
-  }
 
 //  security protocols
   @Override
@@ -129,4 +112,19 @@ public class ApplicationUser implements UserDetails {
     return true;
   }
 
+  public String getLastName() {
+    return lastName;
+  }
+
+  public List<UserIdea> getUserIdeaList() {
+    return userIdeaList;
+  }
+
+//  public Set<ApplicationUser> getUsersThatIFollow() {
+//    return UsersThatIFollow;
+//  }
+//
+//  public Set<ApplicationUser> getUsersThatFollowMe() {
+//    return UsersThatFollowMe;
+//  }
 }
