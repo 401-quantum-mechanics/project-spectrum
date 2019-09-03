@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Project Spectrum</title>
+    <div th:replace="fragments/fragments :: head"></div>
 </head>
 <body>
-    <h1>Welcome to Project Spectrum</h1>
+    <div th:replace="fragments/fragments :: header"></div>
+
+    <!-- NAVIGATION FRAGMENT -->
+    <div th:replace="fragments/nav :: nav"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+                <div class="jumbotron shadow">
+                    <h1 class="display-4 jumbo-title">Project Spectrum</h1>
+                    <p class="lead">A place where ideas are shared and created.</p>
+                    <hr class="my-4">
+                    <a href="/login" class="btn btn-primary btn-lg" role="button">Login</a>
+                    <a href="/signup" class="btn btn-outline-primary btn-lg" role="button">Sign up?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
 </body>
 </html>

@@ -27,11 +27,48 @@ public class HomeController {
 
     m.addAttribute("user", applicationUser);
 
-    return "homepage";
+    return "home";
   }
-    @GetMapping("/idea")
-  public String getIdeaPage(){
-    return "ideapage";
-    }
+
+  @GetMapping("/login")
+  public String getLoginPage(Principal p, Model m) {
+
+    return "login";
+  }
+
+  @GetMapping("/signup")
+  public String getSignupPage(Principal p, Model m) {
+
+
+    return "signup";
+  }
+
+  @GetMapping("/profile")
+  public String getProfilePage(Principal p, Model m) {
+
+
+    return "profile";
+  }
+
+  @GetMapping("/idea")
+  public String getIdeaFormPage(Principal p, Model m) {
+
+
+    return "ideaForm";
+  }
+
+  @GetMapping("/idea/details")
+  public String getIdeaDetailsPage(Principal p, Model m) {
+
+
+    return "ideaDetails";
+  }
+
+  @GetMapping("/ideas")
+  public String getAllIdeasPage(Principal p, Model m) {
+
+
+    return "allIdeas";
+  }
 
 }

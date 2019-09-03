@@ -1,1 +1,110 @@
-/* Custom CSS */
+
+nav {
+    margin-bottom: 50px;
+}
+
+nav.navbar > a.navbar-brand, .jumbotron > .jumbo-title {
+    font-family: 'Iceland', cursive;
+    color: #527190;
+}
+
+.btn-primary {
+    background-color: #527190;
+    border-color: #527190;
+}
+
+.btn-outline-primary {
+    color: #527190;
+    border-color: #527190;
+}
+
+.jumbotron > .jumbo-title {
+    font-size: 70px;
+}
+
+.jumbotron {
+    background-color: #f2f3f8;
+}
+
+.jumbotron > .lead {
+    color: #323d51;
+}
+
+.profile-icon {
+    width: 100%;
+}
+
+.profile-icon-small {
+    width: 60%;
+}
+
+.profile-img-col-border {
+    border-right: 1px dotted #ddd;
+}
+
+.profile-info {
+    padding-bottom: 20px;
+    border-bottom: 1px dotted #ddd;
+    margin-bottom: 10px;
+}
+
+.profile-page-info {
+    padding-left: 20px;
+}
+
+div.page-title {
+    margin-bottom: 20px;
+    font-family: 'Iceland', cursive;
+}
+
+div.page-title > h1 {
+    color: #527190;
+    font-size: 4.5rem;
+}
+
+.profile-card-row {
+    margin-bottom: 60px;
+}
+
+.profile-card-row > div > .card {
+    background: #eee;
+}
+
+.idea-details-row {
+    margin-bottom: 40px;
+}
+
+.idea-profile-card-row {
+    margin-bottom: 40px;
+}
+
+.idea-card {
+    max-height: 150px;
+    overflow: scroll;
+}
+
+.card-header {
+    background-color: #527190;
+    color: white;
+}
+
+body, html {
+    height: 100%;
+}
+
+body {
+    background-image: url("tech-buildings.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100%;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.card-body {
+    padding: 1.75rem;
+}

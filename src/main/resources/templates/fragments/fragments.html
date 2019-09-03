@@ -6,13 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/styles.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Iceland&display=swap" rel="stylesheet">
+    <title>Project Spectrum</title>
 </div>
 
 <!--header inside body-->
-<div th:fragment="header" class="jumbotron text-center" th:if="${user}">
-    <h1>Project Spectrum</h1>
+<div th:fragment="header" th:if="${user}">
 
 <!--    if user already logged in-->
     <div th:if="${user}">
@@ -24,14 +24,10 @@
 <!--    if user is not logged in-->
     <div th:unless="${user}">
         Hello and welcome to the future! You are a new user please register and login.
-        <nav><a href="/register">Register</a> <a href="/login">Login</a>
+        <nav><a href="/register">Register</a> <a href="/login">Login</a></nav>
 
     </div>
 
-
-
 </div>
-
-
 
 </html>

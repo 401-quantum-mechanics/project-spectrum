@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Header Fragment -->
+    <div th:replace="fragments/fragments :: head"></div>
+</head>
+<body>
+
+<!-- Navigation Fragment -->
+<div th:replace="fragments/nav :: nav"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3 text-center page-title">
+            <h1>Idea Details</h1>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+            <div class="card idea-profile-card-row">
+                <div class="card-body">
+                    <div class="row profile-info">
+                        <div class="col-sm-6 profile-img-col-border">
+                            <div class="text-center">
+                                <img src="/profile-icon.jpg" class="profile-icon-small" alt="...">
+                                <button type="button" class="btn btn-primary btn-block">Team Up</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 profile-page-info">
+                            <div class="row">
+                                <div class="col">
+                                    <h1>Test User</h1>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <a href="#"><p>test@email.com</p></a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p><span>Ideas: </span><span>10</span></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p><span>Followers: </span><span>4</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <!-- Idea Details -->
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" readonly name="title" class="form-control" id="title" aria-describedby="title" value="Title of a project goes here . . .">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="idea">Idea</label>
+                                <textarea name="idea" readonly class="form-control" id="idea" rows="10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-header">
+                    Comments
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/comment/idea/" class="mb-4">
+                        <div class="form-group">
+                            <label for="body">Enter your comment here:</label>
+                            <textarea type="text" name="body" class="form-control" id="body" aria-describedby="body" maxlength="255" rows="2" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+
+
+                    <ul class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">Comment 1</h5>
+                                <small>3 days ago</small>
+                            </div>
+                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                            <small>Donec id elit non mi porta.</small>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">Comment 2</h5>
+                                <small>3 days ago</small>
+                            </div>
+                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                            <small>Donec id elit non mi porta.</small>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">Comment 3</h5>
+                                <small>3 days ago</small>
+                            </div>
+                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                            <small>Donec id elit non mi porta.</small>
+                        </a>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+</body>
+</html>
