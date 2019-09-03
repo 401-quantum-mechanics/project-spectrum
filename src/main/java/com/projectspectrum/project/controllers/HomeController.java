@@ -58,7 +58,6 @@ public class HomeController {
     return "ideaForm";
   }
 
-
   @GetMapping("/idea/details")
   public String getIdeaDetailsPage(Principal p, Model m) {
     ApplicationUser applicationUser = null;
