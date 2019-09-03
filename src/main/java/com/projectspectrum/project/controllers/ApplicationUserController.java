@@ -2,6 +2,9 @@ package com.projectspectrum.project.controllers;
 
 import com.projectspectrum.project.models.ApplicationUser;
 import com.projectspectrum.project.models.ApplicationUserRepository;
+import com.projectspectrum.project.models.UserIdea;
+import com.projectspectrum.project.models.UserIdeaRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +19,7 @@ import sun.jvm.hotspot.utilities.AltPlatformInfo;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ApplicationUserController {
@@ -23,6 +27,9 @@ public class ApplicationUserController {
   //  wire in application user database
   @Autowired
   ApplicationUserRepository applicationUserRepository;
+
+  @Autowired
+  UserIdeaRepository userIdeaRepository;
 
   @Autowired
   PasswordEncoder encoder;
@@ -47,7 +54,7 @@ public class ApplicationUserController {
 
   @PostMapping("/signup")
   public RedirectView createUser(String password, String firstName, String lastName, String username) {
-    System.out.println("password " + password);
+
     ApplicationUser newUser = new ApplicationUser( encoder.encode(password), firstName, lastName, username);
     applicationUserRepository.save(newUser);
     Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
@@ -60,11 +67,15 @@ public class ApplicationUserController {
   @GetMapping("/profile")
   public String getProfile(Principal p, Model m){
     ApplicationUser applicationUser = null;
+    List<UserIdea> userIdeas = null;
 
     if(p!=null){
       applicationUser = applicationUserRepository.findByUsername(p.getName());
+      userIdeas = applicationUserRepository.findByUsername(p.getName()).getIdeas();
+
     }
     m.addAttribute("user", applicationUser);
+    m.addAttribute("ideas", userIdeas);
     return "profile";
   }
 

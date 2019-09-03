@@ -4,10 +4,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -26,6 +24,8 @@ public class ApplicationUser implements UserDetails {
 //  Ideas
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
   List<UserIdea> userIdeaList;
+
+
 //  // Comments
 //  @OneToMany(fetch = FetchType.EAGER, mappedBy = "user_commenting")
 //  List<UserComment> userCommentList;
@@ -68,6 +68,10 @@ public class ApplicationUser implements UserDetails {
 //  getters
   public long getId() {
     return this.id;
+  }
+
+  public List<UserIdea> getIdeas(){
+    return this.userIdeaList;
   }
 
   @Override

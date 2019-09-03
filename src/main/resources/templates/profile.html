@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Header Fragment -->
     <div th:replace="fragments/fragments :: head"></div>
@@ -29,24 +29,32 @@
                     <div class="col-sm-6 profile-page-info">
                         <div class="row">
                             <div class="col">
-                                <h1>Test User</h1>
+                                <h1
+                                        th:text="${user.firstName + ' ' + user.lastName}">Test
+                                    User</h1>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <a href="#"><p>test@email.com</p></a>
+                                <a
+                                        href="#"><p th:text="${user.username}">test@email
+                                    .com</p></a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p><span>Ideas: </span><span>10</span></p>
+                                <p><span>Total Projects Suggested: </span><span
+                                        th:text="${ideas.size()}">
+                                </span></p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p><span>Followers: </span><span>4</span></p>
+                                <p><span>Total Team Participation: </span><span>4
+                                </span></p>
                             </div>
                         </div>
+                        <a href="/idea" class="btn btn-link">Suggest Project</a>
                     </div>
                 </div>
             </div>
@@ -91,10 +99,11 @@
 
         <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="card">
-                <h5 class="card-header">Ideas</h5>
+                <h5 class="card-header">Suggested Projects</h5>
                 <div class="card-body">
-                    <ul class="list-group list-group-flush">
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <ul th:if="${ideas}" class="list-group list-group-flush">
+                        <a th:each="idea : ${ideas}" href="#"
+                            class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">Test 1</h5>
                                 <small>3 days ago</small>
@@ -102,23 +111,16 @@
                             <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
                             <small>Donec id elit non mi porta.</small>
                         </a>
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Test 2</h5>
-                                <small>3 days ago</small>
-                            </div>
-                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Donec id elit non mi porta.</small>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Test 3</h5>
-                                <small>3 days ago</small>
-                            </div>
-                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Donec id elit non mi porta.</small>
-                        </a>
                     </ul>
+
+                    <ul th:unless="${ideas.size() > 0}"
+                        class="list-group list-group-flush">
+                       <li class="list-group-item"> <h1>You have not contributed to our
+                           success... You
+                        suck!</h1></li>
+                    </ul>
+
+
                 </div>
             </div>
         </div>
