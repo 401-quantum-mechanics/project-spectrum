@@ -58,16 +58,6 @@ public class HomeController {
     return "ideaForm";
   }
 
-  @PostMapping("/idea")
-  public RedirectView createIdea(String title, String body, long createdBy, Date createAt, ApplicationUser user) {
-
-    UserIdea newIdea = new UserIdea(title, body, createdBy, createAt, user);
-    userIdeaRepository.save(newIdea);
-
-    return new RedirectView("/profile");
-  }
-
-
   @GetMapping("/idea/details")
   public String getIdeaDetailsPage(Principal p, Model m) {
     ApplicationUser applicationUser = null;
