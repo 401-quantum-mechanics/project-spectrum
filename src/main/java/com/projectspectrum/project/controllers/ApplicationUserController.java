@@ -28,7 +28,14 @@ public class ApplicationUserController {
   PasswordEncoder encoder;
 
   @GetMapping("/login")
-  public String getLoginPage() {
+  public String getLoginPage(Principal p, Model m) {
+
+    ApplicationUser applicationUser = null;
+
+    if(p!=null){
+      applicationUser = applicationUserRepository.findByUsername(p.getName());
+    }
+    m.addAttribute("user", applicationUser);
 
     return "login";
   }
@@ -39,9 +46,9 @@ public class ApplicationUserController {
   }
 
   @PostMapping("/signup")
-  public RedirectView createUser(String password, String firstName, String lastName, String email) {
+  public RedirectView createUser(String password, String firstName, String lastName, String username) {
     System.out.println("password " + password);
-    ApplicationUser newUser = new ApplicationUser( encoder.encode(password), firstName, lastName, email);
+    ApplicationUser newUser = new ApplicationUser( encoder.encode(password), firstName, lastName, username);
     applicationUserRepository.save(newUser);
     Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
 
