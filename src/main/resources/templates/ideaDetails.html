@@ -19,13 +19,15 @@
 
     <div class="row">
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-            <div class="card idea-profile-card-row">
+            <div class="card idea-profile-card-row shadow">
                 <div class="card-body">
                     <div class="row profile-info">
-                        <div class="col-sm-6 profile-img-col-border">
-                            <div class="text-center">
-                                <img src="/profile-icon.jpg" class="profile-icon-small" alt="...">
-                                <button type="button" class="btn btn-primary btn-block">Team Up</button>
+                        <div class="col-sm-6 text-center">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img src="/profile-icon.jpg" class="profile-icon-small" alt="...">
+                                    <button type="button" class="btn btn-primary btn-block">Team Up</button>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-6 profile-page-info">
@@ -56,7 +58,6 @@
                                 </span></p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
@@ -65,12 +66,18 @@
                             <!-- Idea Details -->
                             <div class="form-group">
                                 <label for="title">Title</label>
-                                <input type="text" readonly name="title" class="form-control" id="title" aria-describedby="title" value="Title of a project goes here . . .">
+                                <input type="text" readonly name="title" class="form-control" id="title" aria-describedby="title" th:value="${idea_details.title}">
                             </div>
 
                             <div class="form-group">
                                 <label for="idea">Idea</label>
-                                <textarea name="idea" readonly class="form-control" id="idea" rows="10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+                                <textarea name="idea" readonly class="form-control" id="idea" rows="10" th:text="${idea_details.body}"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="info">Addition Info</label>
+<!--                                <textarea name="info" readonly class="form-control" id="info" rows="4"><span th:text="${idea_details.info}"></span></textarea>-->
+                                <textarea name="info" readonly class="form-control" id="info" rows="4">Additional info goes here . . .</textarea>
                             </div>
                         </div>
                     </div>
@@ -80,9 +87,9 @@
     </div>
 
 
-    <div class="row">
+    <div class="row profile-card-row">
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header">
                     Comments
                 </div>

@@ -19,42 +19,53 @@
 
     <div class="row profile-card-row">
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
-            <div class="card">
+            <div class="card shadow">
                 <div class="row card-body">
-                    <div class="col-sm-6 profile-img-col-border">
-                        <div class="text-center">
-                            <img src="/profile-icon.jpg" class="profile-icon" alt="...">
+
+
+                    <div class="col-sm-6 text-center">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="/profile-icon.jpg" class="profile-icon" alt="...">
+                            </div>
                         </div>
                     </div>
+
+
+
+
                     <div class="col-sm-6 profile-page-info">
                         <div class="row">
                             <div class="col">
-                                <h1
-                                        th:text="${user.firstName + ' ' + user.lastName}">Test
-                                    User</h1>
+                                <h3 th:text="${user.firstName + ' ' + user.lastName}">Test
+                                    User</h3>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <a
-                                        href="#"><p th:text="${user.username}">test@email
+                                <a href="#"><p th:text="${user.username}">test@email
                                     .com</p></a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p><span>Total Projects Suggested: </span><span
+                                <p><span>Ideas: </span><span
                                         th:text="${ideas.size()}">
                                 </span></p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <p><span>Total Team Participation: </span><span>4
+                                <p><span>Teams: </span><span>4
                                 </span></p>
                             </div>
                         </div>
-                        <a href="/idea" class="btn btn-link">Suggest Project</a>
+
+                        <div class="row">
+                            <div class="col">
+                                <a href="/idea" class="btn btn-primary btn-block">Got an idea?</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,7 +74,7 @@
 
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4">
-            <div class="card">
+            <div class="card shadow">
                 <h5 class="card-header">Teams</h5>
                 <div class="card-body">
 
@@ -98,35 +109,30 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4">
-            <div class="card">
-                <h5 class="card-header">Suggested Projects</h5>
+            <div class="card shadow">
+                <h5 class="card-header">Ideas</h5>
                 <div class="card-body">
                     <ul th:if="${ideas}" class="list-group list-group-flush">
-                        <a th:each="idea : ${ideas}" href="#"
+                        <a th:each="idea : ${ideas}" th:href="'/ideaPage/' + ${idea.id}"
                             class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Test 1</h5>
-                                <small>3 days ago</small>
+                                <h5 class="mb-1" th:text="${idea.title}">Test 1</h5>
                             </div>
-                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Donec id elit non mi porta.</small>
+                            <p class="mb-1" th:text="${idea.body}"></p>
+                            <small th:text="${idea.createAt}"></small>
                         </a>
                     </ul>
 
                     <ul th:unless="${ideas.size() > 0}"
                         class="list-group list-group-flush">
-                       <li class="list-group-item"> <h1>You have not contributed to our
-                           success... You
-                        suck!</h1></li>
+                       <li class="list-group-item">No ideas have been submitted.</li>
                     </ul>
-
-
                 </div>
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4">
-            <div class="card">
+            <div class="card shadow">
                 <h5 class="card-header">Followers</h5>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
