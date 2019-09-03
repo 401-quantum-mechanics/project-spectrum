@@ -49,7 +49,7 @@ ApplicationUser user;
 
 
 //  constructor
-  public UserIdea(String title, String body, long createdBy, Date createAt, ApplicationUser user) {
+  public UserIdea(String title, String body, Date createAt, ApplicationUser user) {
     this.title     = title;
     this.body      = body;
     this.createAt  = createAt;

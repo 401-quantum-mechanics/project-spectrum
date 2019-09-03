@@ -1,3 +1,4 @@
+
 package com.projectspectrum.project.controllers;
 
 import com.projectspectrum.project.models.ApplicationUser;
@@ -82,19 +83,6 @@ public class HomeController {
 
 
     return "ideaDetails";
-  }
-
-  @GetMapping("/ideas")
-  public String getAllIdeasPage(Principal p, Model m) {
-    ApplicationUser applicationUser = null;
-
-    if(p!=null){
-      applicationUser = applicationUserRepository.findByUsername(p.getName());
-    }
-    m.addAttribute("user", applicationUser);
-
-
-    return "allIdeas";
   }
 
   @GetMapping("/aboutus")
