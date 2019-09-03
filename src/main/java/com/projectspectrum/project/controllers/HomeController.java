@@ -42,4 +42,11 @@ public class HomeController {
 
     return "signup";
   }
+
+  @GetMapping("/profile")
+  public String getProfilePage(Principal p, Model m) {
+
+
+    return "profile";
+  }
 }
