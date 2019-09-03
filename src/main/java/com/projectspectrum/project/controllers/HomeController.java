@@ -49,4 +49,25 @@ public class HomeController {
 
     return "profile";
   }
+
+  @GetMapping("/idea")
+  public String getIdeaFormPage(Principal p, Model m) {
+
+
+    return "ideaForm";
+  }
+
+  @GetMapping("/idea/details")
+  public String getIdeaDetailsPage(Principal p, Model m) {
+
+
+    return "ideaDetails";
+  }
+
+  @GetMapping("/ideas")
+  public String getAllIdeasPage(Principal p, Model m) {
+
+
+    return "allIdeas";
+  }
 }
