@@ -60,6 +60,7 @@ public class HomeController {
     return "ideaDetails";
   }
 
+
   @GetMapping("/ideas")
   public String getAllIdeasPage(Principal p, Model m) {
     ApplicationUser applicationUser = null;
@@ -72,6 +73,5 @@ public class HomeController {
 
     return "allIdeas";
   }
-
 
 }
