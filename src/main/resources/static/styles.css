@@ -66,6 +66,10 @@ div.page-title > h1 {
     margin-bottom: 60px;
 }
 
+.profile-card-row > div > .card {
+    background: #eee;
+}
+
 .idea-details-row {
     margin-bottom: 40px;
 }

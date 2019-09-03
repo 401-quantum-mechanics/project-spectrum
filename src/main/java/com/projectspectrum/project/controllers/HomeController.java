@@ -70,9 +70,5 @@ public class HomeController {
 
     return "allIdeas";
   }
-    @GetMapping("/idea")
-  public String getIdeaPage(){
-    return "ideapage";
-    }
 
 }
