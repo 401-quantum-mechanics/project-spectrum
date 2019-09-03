@@ -44,8 +44,13 @@ public class UserIdeaController {
 
     @GetMapping("/ideaPage/{id}")
     public String getIdeaDetails(@PathVariable long id, Model model, Principal p){
+
+        List<UserIdea> userIdeas = userIdeas = applicationUserRepository.findByUsername(p.getName()).getIdeas();
+        model.addAttribute("ideas", userIdeas);
+
         ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
         model.addAttribute("user", applicationUser);
+
         UserIdea userIdea = userIdeaRepository.findById(id);
         model.addAttribute("idea_details", userIdea);
         return "IdeaDetails";
