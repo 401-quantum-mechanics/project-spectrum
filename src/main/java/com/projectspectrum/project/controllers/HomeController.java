@@ -64,11 +64,11 @@ public class HomeController {
     return "ideaDetails";
   }
 
-  @GetMapping("/ideas")
-  public String getAllIdeasPage(Principal p, Model m) {
-
-
-    return "allIdeas";
-  }
+//  @GetMapping("/ideas")
+//  public String getAllIdeasPage(Principal p, Model m) {
+//
+//
+//    return "allIdeas";
+//  }
 
 }
