@@ -78,8 +78,6 @@ public class ApplicationUserController {
     m.addAttribute("ideas", userIdeas);
     return "profile";
   }
-
-
-
+  
 
 }

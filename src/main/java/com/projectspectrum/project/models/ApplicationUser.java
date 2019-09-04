@@ -26,26 +26,13 @@ public class ApplicationUser implements UserDetails {
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
   List<UserIdea> userIdeaList;
 // This is many to one for users to team up
-  @ManyToOne
-  TeamUp team;
+  @ManyToMany(mappedBy = "team")
+  Set<UserIdea>teamUpIdeas;
 
 
 //  // Comments
   @OneToOne
   UserComment comment;
-
-////  Followers and following
-//  @OneToMany
-//  @JoinTable(
-//    name = "userFollows",
-//              joinColumns = { @JoinColumn(name = "primaryUser")},
-//              inverseJoinColumns = {@JoinColumn(name = "followedUser")}
-//  )
-//  Set<ApplicationUser> UsersThatIFollow;
-//
-//  @ManyToMany
-//  Set<ApplicationUser> UsersThatFollowMe;
-
 
 
 
@@ -120,11 +107,5 @@ public class ApplicationUser implements UserDetails {
     return userIdeaList;
   }
 
-//  public Set<ApplicationUser> getUsersThatIFollow() {
-//    return UsersThatIFollow;
-//  }
-//
-//  public Set<ApplicationUser> getUsersThatFollowMe() {
-//    return UsersThatFollowMe;
-//  }
+
 }
