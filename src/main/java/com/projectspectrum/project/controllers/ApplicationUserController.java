@@ -4,7 +4,6 @@ import com.projectspectrum.project.models.ApplicationUser;
 import com.projectspectrum.project.models.ApplicationUserRepository;
 import com.projectspectrum.project.models.UserIdea;
 import com.projectspectrum.project.models.UserIdeaRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
-//import sun.jvm.hotspot.utilities.AltPlatformInfo;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -56,12 +54,20 @@ public class ApplicationUserController {
   public RedirectView createUser(String password, String firstName, String lastName, String username) {
 
     ApplicationUser newUser = new ApplicationUser( encoder.encode(password), firstName, lastName, username);
+
+//    check database for existing username
+    ApplicationUser applicationUser = applicationUserRepository.findByUsername(username);
+    if(applicationUser!=null){
+      return new RedirectView("/login");
+    } else {
+
+
     applicationUserRepository.save(newUser);
     Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
 
     SecurityContextHolder.getContext().setAuthentication(authentication);//
 
-    return new RedirectView("/profile");
+    return new RedirectView("/profile");}
   }
 
   @GetMapping("/profile")
@@ -78,8 +84,6 @@ public class ApplicationUserController {
     m.addAttribute("ideas", userIdeas);
     return "profile";
   }
-
-
-
+  
 
 }
