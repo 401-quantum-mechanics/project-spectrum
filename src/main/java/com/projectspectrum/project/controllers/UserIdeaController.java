@@ -1,9 +1,7 @@
 package com.projectspectrum.project.controllers;
 
-import com.projectspectrum.project.models.ApplicationUser;
-import com.projectspectrum.project.models.ApplicationUserRepository;
-import com.projectspectrum.project.models.UserIdea;
-import com.projectspectrum.project.models.UserIdeaRepository;
+import com.projectspectrum.project.models.*;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,32 +16,35 @@ import java.util.List;
 
 @Controller
 public class UserIdeaController {
-//Repos to be autowired to the controller
+    //Repos to be autowired to the controller
     @Autowired
     UserIdeaRepository userIdeaRepository;
     @Autowired
     ApplicationUserRepository applicationUserRepository;
 
+    @Autowired
+    UserCommentRepository userCommentRepository;
+
     @PostMapping("/createIdea")
-    public RedirectView createIdea(String body, String title, Principal user){
+    public RedirectView createIdea(String body, String title, Principal user) {
         Date date = new Date(System.currentTimeMillis());
         ApplicationUser fullUser = applicationUserRepository.findByUsername(user.getName());
-        UserIdea userIdea = new UserIdea(title,body, date, fullUser);
+        UserIdea userIdea = new UserIdea(title, body, date, fullUser);
         userIdeaRepository.save(userIdea);
         return new RedirectView("profile");
     }
 
     @GetMapping("/ideas")
-    public String getListOfIdeas(Model model, Principal p){
-       ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
-       model.addAttribute("user", applicationUser);
-       List<UserIdea> ideasList =  userIdeaRepository.findAll();
-       model.addAttribute("ideas", ideasList);
-       return "allIdeas";
+    public String getListOfIdeas(Model model, Principal p) {
+        ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
+        model.addAttribute("user", applicationUser);
+        List<UserIdea> ideasList = userIdeaRepository.findAll();
+        model.addAttribute("ideas", ideasList);
+        return "allIdeas";
     }
 
     @GetMapping("/ideaPage/{id}")
-    public String getIdeaDetails(@PathVariable long id, Model model, Principal p){
+    public String getIdeaDetails(@PathVariable long id, Model model, Principal p) {
 
         List<UserIdea> userIdeas = userIdeas = applicationUserRepository.findByUsername(p.getName()).getIdeas();
         model.addAttribute("ideas", userIdeas);
@@ -56,5 +57,24 @@ public class UserIdeaController {
         return "IdeaDetails";
     }
 
+    @PostMapping("/ideaPage/comment")
+//    UserComment(UserIdea idea, String body, Date createdAt, ApplicationUser user)
+    public RedirectView createComment(String body, long ideaId, Principal p) {
+        Date date = new Date(System.currentTimeMillis());
+        ApplicationUser fullUser = applicationUserRepository.findByUsername(p.getName());
+
+//        long parsedIdea = Long.parseLong(ideaId);
+//        System.out.println("****************************** " + parsedIdea);
+        UserIdea userIdea = userIdeaRepository.findById(ideaId);
+        System.out.println("*************************************" + userIdea);
+//        UserComment comment = new UserComment("this is s test");
+//        userCommentRepository.save(comment);
+        UserComment userComment = new UserComment(userIdea, body, date, fullUser);
+//        userIdea.setCommentOnIdea(userComment);
+        System.out.println("/////********************************" + userComment);
+        userCommentRepository.save(userComment);
+        return new RedirectView("/profile");
+
+    }
 
 }
