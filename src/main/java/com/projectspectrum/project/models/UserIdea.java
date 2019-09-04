@@ -96,4 +96,8 @@ ApplicationUser user;
     return user;
   }
 
+  public void setCommentOnIdea(List<UserComment> commentOnIdea) {
+
+    this.commentOnIdea = commentOnIdea;
+  }
 }

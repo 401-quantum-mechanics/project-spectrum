@@ -66,60 +66,8 @@
                             </div>
                         </div>
                     </div>
-
-<!--                    <div class="row profile-info">-->
-<!--                        <div class="col-sm-6 text-center">-->
-<!--                            <div class="card">-->
-<!--                                <div class="card-body">-->
-<!--                                    <img src="/profile-icon.jpg" class="profile-icon-small" alt="...">-->
-<!--                                    <button type="button" class="btn btn-primary btn-block">Team Up</button>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-sm-6 profile-page-info">-->
-<!--                            <div class="row">-->
-<!--                                <div class="col">-->
-<!--                                    <h1-->
-<!--                                            th:text="${user.firstName + ' ' + user.lastName}">Test-->
-<!--                                        User</h1>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="row">-->
-<!--                                <div class="col">-->
-<!--                                    <a-->
-<!--                                            href="#"><p th:text="${user.username}">test@email-->
-<!--                                        .com</p></a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="row">-->
-<!--                                <div class="col">-->
-<!--                                    <p><span>Total Projects Suggested: </span><span-->
-<!--                                            th:text="${ideas.size()}">-->
-<!--                                </span></p>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="row">-->
-<!--                                <div class="col">-->
-<!--                                    <p><span>Total Team Participation: </span><span>4-->
-<!--                                </span></p>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-
-
-
-
-
-
-
-
-
-
         </div>
     </div>
-
 
     <div class="row profile-card-row">
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
@@ -128,11 +76,12 @@
                     Comments
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="/comment/idea/" class="mb-4">
+                    <form method="POST" action="/ideaPage/comment" class="mb-4">
                         <div class="form-group">
                             <label for="body">Enter your comment here:</label>
-                            <textarea type="text" name="body" class="form-control" id="body" aria-describedby="body" maxlength="255" rows="2" required></textarea>
+                            <textarea name="body" class="form-control" id="body" aria-describedby="body" maxlength="255" rows="2" required></textarea>
                         </div>
+                        <input type="hidden" name="ideaId" th:value="${idea_details.id}"/>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
