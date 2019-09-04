@@ -50,30 +50,38 @@ public class UserIdeaController {
 
     @GetMapping("/ideaPage/{id}")
     public String getIdeaDetails(@PathVariable long id, Model model, Principal p) {
-        List<UserIdea> userIdeas = userIdeas = applicationUserRepository.findByUsername(p.getName()).getIdeas();
-        model.addAttribute("ideas", userIdeas);
-        ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
-        model.addAttribute("user", applicationUser);
         UserIdea userIdea = userIdeaRepository.findById(id);
         model.addAttribute("idea_details", userIdea);
+
+        ApplicationUser ideaUser = userIdea.getUser();
+        model.addAttribute("ideaUser", ideaUser);
+
+        List<UserIdea> userIdeas = applicationUserRepository.findByUsername(p.getName()).getIdeas();
+        model.addAttribute("ideas", userIdeas);
+
+        List<UserComment> comments = userIdea.getCommentOnIdea();
+        model.addAttribute("comments", comments);
+
+        ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
+        model.addAttribute("user", applicationUser);
+
+
         return "IdeaDetails";
     }
 
     @GetMapping("/teamUp/{id}")
-    public RedirectView teamUp(@PathVariable long id, Principal principal, Model model){
+    public RedirectView teamUp(@PathVariable long id, Principal principal, Model model) {
         UserIdea userIdea = userIdeaRepository.findById(id);
         ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
-        if(!userIdea.getTeam().getUsersOnTeam().contains(user)) {
+        if (!userIdea.getTeam().getUsersOnTeam().contains(user)) {
             userIdea.getTeam().setUsersOnTeam(user);
-        }
-        else{
+        } else {
             userIdea.getTeam().removeUsersOnTeam(user);
         }
-        return new RedirectView("/ideaPage/"+ id);
-
+        return new RedirectView("/ideaPage/" + id);
+    }
 
     @PostMapping("/ideaPage/comment")
-
     public RedirectView createComment(String body, long ideaId, Principal p) {
         Date date = new Date(System.currentTimeMillis());
         ApplicationUser fullUser = applicationUserRepository.findByUsername(p.getName());

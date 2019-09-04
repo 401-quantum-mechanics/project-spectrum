@@ -11,6 +11,7 @@ public class UserComment {
   public long id;
   public String body;
   public Date createdAt;
+  public String name;
   @OneToOne
   ApplicationUser commenting_user;
   // The idea being commented on
@@ -23,6 +24,7 @@ public class UserComment {
     this.commenting_user = user;
     this.body = body;
     this.createdAt = createdAt;
+    this.name = user.firstName;
   }
 
   public UserComment(String body){
