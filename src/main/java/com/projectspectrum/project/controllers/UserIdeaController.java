@@ -1,7 +1,6 @@
 package com.projectspectrum.project.controllers;
 
 import com.projectspectrum.project.models.*;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +20,8 @@ public class UserIdeaController {
     UserIdeaRepository userIdeaRepository;
     @Autowired
     ApplicationUserRepository applicationUserRepository;
+    @Autowired
+    TeamUpRepository teamUpRepository;
 
     @Autowired
     UserCommentRepository userCommentRepository;
@@ -29,7 +30,11 @@ public class UserIdeaController {
     public RedirectView createIdea(String body, String title, Principal user) {
         Date date = new Date(System.currentTimeMillis());
         ApplicationUser fullUser = applicationUserRepository.findByUsername(user.getName());
-        UserIdea userIdea = new UserIdea(title, body, date, fullUser);
+        UserIdea userIdea = new UserIdea(title,body, date, fullUser);
+        TeamUp team = new TeamUp(userIdea,fullUser);
+        userIdeaRepository.save(userIdea);
+        teamUpRepository.save(team);
+        userIdea.setTeam(team);
         userIdeaRepository.save(userIdea);
         return new RedirectView("profile");
     }
@@ -45,33 +50,35 @@ public class UserIdeaController {
 
     @GetMapping("/ideaPage/{id}")
     public String getIdeaDetails(@PathVariable long id, Model model, Principal p) {
-
         List<UserIdea> userIdeas = userIdeas = applicationUserRepository.findByUsername(p.getName()).getIdeas();
         model.addAttribute("ideas", userIdeas);
-
         ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
         model.addAttribute("user", applicationUser);
-
         UserIdea userIdea = userIdeaRepository.findById(id);
         model.addAttribute("idea_details", userIdea);
         return "IdeaDetails";
     }
 
+    @GetMapping("/teamUp/{id}")
+    public RedirectView teamUp(@PathVariable long id, Principal principal, Model model){
+        UserIdea userIdea = userIdeaRepository.findById(id);
+        ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
+        if(!userIdea.getTeam().getUsersOnTeam().contains(user)) {
+            userIdea.getTeam().setUsersOnTeam(user);
+        }
+        else{
+            userIdea.getTeam().removeUsersOnTeam(user);
+        }
+        return new RedirectView("/ideaPage/"+ id);
+
+
     @PostMapping("/ideaPage/comment")
-//    UserComment(UserIdea idea, String body, Date createdAt, ApplicationUser user)
+
     public RedirectView createComment(String body, long ideaId, Principal p) {
         Date date = new Date(System.currentTimeMillis());
         ApplicationUser fullUser = applicationUserRepository.findByUsername(p.getName());
-
-//        long parsedIdea = Long.parseLong(ideaId);
-//        System.out.println("****************************** " + parsedIdea);
         UserIdea userIdea = userIdeaRepository.findById(ideaId);
-        System.out.println("*************************************" + userIdea);
-//        UserComment comment = new UserComment("this is s test");
-//        userCommentRepository.save(comment);
         UserComment userComment = new UserComment(userIdea, body, date, fullUser);
-//        userIdea.setCommentOnIdea(userComment);
-        System.out.println("/////********************************" + userComment);
         userCommentRepository.save(userComment);
         return new RedirectView("/profile");
 
