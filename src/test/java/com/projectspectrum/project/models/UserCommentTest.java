@@ -44,10 +44,14 @@ public class UserCommentTest {
   }
 
   @Test
-  public void getCommenting_user() {
+  public void testGetCommenting_user() {
+    assertEquals("testGetCommenting_user equals BandT@Excellent.Adveture.com", "BandT@Excellent.Adveture.com",
+                 userComment.getCommenting_user().getUsername());
   }
 
   @Test
-  public void getTarget_idea() {
+  public void testGetTarget_idea() {
+    assertEquals("testGetTarget_idea equals.", "Project What up Brah!: Nothin, what up wich you? ; Created By: Ted, Created On 09/04/19",
+                 userComment.getTarget_idea().toString());
   }
 }
