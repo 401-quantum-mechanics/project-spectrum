@@ -50,7 +50,18 @@
                             <h5 class="font-weight-bold mb-0 d-block" th:text="${ideas.size()}">10</h5><small class="text-muted"> Ideas</small>
                         </li>
                         <li class="list-inline-item">
-                            <h5 class="font-weight-bold mb-0 d-block" th:text="${team.size()}">4</h5><small class="text-muted"> Teams</small>
+<!--                            <span th:if="${team}">-->
+<!--                                <a th:href="'/teamUp/' + ${idea_details.id}" class="btn btn-primary btn-sm btn-block">-->
+<!--                                    <i class="fas fa-user-minus"></i> Leave Team-->
+<!--                                </a>-->
+<!--                            </span>-->
+<!--                            <span th:unless="${team}">-->
+<!--                                <a th:href="'/teamUp/' + ${idea_details.id}" class="btn btn-primary btn-sm btn-block">-->
+<!--                                    <i class="fas fa-user-plus"></i> Join Team-->
+<!--                                </a>-->
+<!--                            </span>-->
+
+                            <h5 class="font-weight-bold mb-0 d-block" th:text="${teamForSize.size()}">4</h5><small class="text-muted"> Teams</small>
                         </li>
                     </ul>
                 </div>
