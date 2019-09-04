@@ -26,7 +26,16 @@
                     <div class="media align-items-end profile-header">
                         <div class="mr-3">
                             <img src="/user-icon.png" alt="User Icon"  width="200" class="mb-2 rounded-circle img-thumbnail">
-                            <a th:href="'/teamUp/' + ${idea_details.id}" class="btn btn-primary btn-sm btn-block"><i class="fas fa-user-plus"></i> Team Up</a>
+                            <span th:if="${team}">
+                                <a th:href="'/teamUp/' + ${idea_details.id}" class="btn btn-primary btn-sm btn-block">
+                                    <i class="fas fa-user-minus"></i> Leave Team
+                                </a>
+                            </span>
+                            <span th:unless="${team}">
+                                <a th:href="'/teamUp/' + ${idea_details.id}" class="btn btn-primary btn-sm btn-block">
+                                    <i class="fas fa-user-plus"></i> Join Team
+                                </a>
+                            </span>
                         </div>
                         <div class="media-body mb-5 text-white">
                             <h2 class="mt-0 mb-1" th:text="${ideaUser.firstName + ' ' + ideaUser.lastName}">Test User</h2>
@@ -41,7 +50,7 @@
                             <h5 class="font-weight-bold mb-0 d-block" th:text="${ideas.size()}">10</h5><small class="text-muted"> Ideas</small>
                         </li>
                         <li class="list-inline-item">
-                            <h5 class="font-weight-bold mb-0 d-block">4</h5><small class="text-muted"> Teams</small>
+                            <h5 class="font-weight-bold mb-0 d-block" th:text="${team.size()}">4</h5><small class="text-muted"> Teams</small>
                         </li>
                     </ul>
                 </div>

@@ -80,9 +80,15 @@ div.page-title > h1 {
     background: #f2f3f8;
 }
 
-.idea-card {
-    max-height: 150px;
+a.idea-container {
+    text-decoration: none;
+}
+
+.idea-container .card-body {
+    min-height: 250px;
+    max-height: 250px;
     overflow: scroll;
+    color: #323d51;
 }
 
 .card-header {
