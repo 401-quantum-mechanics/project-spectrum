@@ -56,12 +56,20 @@ public class ApplicationUserController {
   public RedirectView createUser(String password, String firstName, String lastName, String username) {
 
     ApplicationUser newUser = new ApplicationUser( encoder.encode(password), firstName, lastName, username);
+
+//    check database for existing username
+    ApplicationUser applicationUser = applicationUserRepository.findByUsername(username);
+    if(applicationUser!=null){
+      return new RedirectView("/login");
+    } else {
+
+
     applicationUserRepository.save(newUser);
     Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
 
     SecurityContextHolder.getContext().setAuthentication(authentication);//
 
-    return new RedirectView("/profile");
+    return new RedirectView("/profile");}
   }
 
   @GetMapping("/profile")
