@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -27,7 +28,7 @@ public class ApplicationUser implements UserDetails {
   List<UserIdea> userIdeaList;
 // This is many to one for users to team up
   @ManyToMany(mappedBy = "team")
-  Set<UserIdea>teamUpIdeas;
+  Set<UserIdea> teamUpIdeas;
 
 
 //  // Comments
