@@ -114,3 +114,12 @@ body {
 .form-control[readonly] {
     background: white;
 }
+
+.profile-header {
+    position: relative;
+    top: 65px;
+}
+
+.profile-background {
+    background: #527190;
+}
