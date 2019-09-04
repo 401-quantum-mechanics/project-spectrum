@@ -15,16 +15,8 @@ public class UserIdea {
   public String body;
   public Date createAt;
 
-  @ManyToMany
-  @JoinTable(
-          // name is potato
-          name="team_ups",
-          // join columns: column where I join a team for an idea
-          joinColumns = { @JoinColumn(name="user_teaming_up") },
-          // inverse: column where I users can join a team
-          inverseJoinColumns = { @JoinColumn(name="idea_to_team_up") }
-  )
-  Set<ApplicationUser> TeamsUsersOn;
+@OneToOne
+TeamUp team;
 
   @ManyToMany
   @JoinTable(
@@ -54,6 +46,7 @@ ApplicationUser user;
     this.body      = body;
     this.createAt  = createAt;
     this.user = user;
+    this.team = null;
   }
 
 //  empty constructor
@@ -84,10 +77,6 @@ ApplicationUser user;
       , this.createAt);
   }
 
-  public Set<ApplicationUser> getTeamsUsersOn() {
-    return TeamsUsersOn;
-  }
-
   public List<UserComment> getCommentOnIdea() {
     return commentOnIdea;
   }
@@ -96,4 +85,15 @@ ApplicationUser user;
     return user;
   }
 
+  public TeamUp getTeam() {
+    return team;
+  }
+
+  public Set<ApplicationUser> getLiking_users() {
+    return liking_users;
+  }
+
+  public void setTeam(TeamUp team) {
+    this.team = team;
+  }
 }

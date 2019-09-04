@@ -1,9 +1,6 @@
 package com.projectspectrum.project.controllers;
 
-import com.projectspectrum.project.models.ApplicationUser;
-import com.projectspectrum.project.models.ApplicationUserRepository;
-import com.projectspectrum.project.models.UserIdea;
-import com.projectspectrum.project.models.UserIdeaRepository;
+import com.projectspectrum.project.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,13 +20,21 @@ public class UserIdeaController {
     UserIdeaRepository userIdeaRepository;
     @Autowired
     ApplicationUserRepository applicationUserRepository;
+    @Autowired
+    TeamUpRepository teamUpRepository;
 
     @PostMapping("/createIdea")
     public RedirectView createIdea(String body, String title, Principal user){
         Date date = new Date(System.currentTimeMillis());
         ApplicationUser fullUser = applicationUserRepository.findByUsername(user.getName());
         UserIdea userIdea = new UserIdea(title,body, date, fullUser);
+        TeamUp team = new TeamUp(userIdea,fullUser);
         userIdeaRepository.save(userIdea);
+        teamUpRepository.save(team);
+        userIdea.setTeam(team);
+        userIdeaRepository.save(userIdea);
+
+
         return new RedirectView("profile");
     }
 
@@ -55,6 +60,17 @@ public class UserIdeaController {
         model.addAttribute("idea_details", userIdea);
         return "IdeaDetails";
     }
-
+    @GetMapping("/teamUp/{id}")
+    public RedirectView teamUp(@PathVariable long id, Principal principal, Model model){
+        UserIdea userIdea = userIdeaRepository.findById(id);
+        ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
+        if(!userIdea.getTeam().getUsersOnTeam().contains(user)) {
+            userIdea.getTeam().setUsersOnTeam(user);
+        }
+        else{
+            userIdea.getTeam().removeUsersOnTeam(user);
+        }
+        return new RedirectView("/ideaPage/"+ id);
+    }
 
 }

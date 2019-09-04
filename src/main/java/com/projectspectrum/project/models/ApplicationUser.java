@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -24,6 +25,9 @@ public class ApplicationUser implements UserDetails {
 //  Ideas
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
   List<UserIdea> userIdeaList;
+// This is many to one for users to team up
+  @ManyToOne
+  TeamUp team;
 
 
 //  // Comments
@@ -42,14 +46,6 @@ public class ApplicationUser implements UserDetails {
 //  @ManyToMany
 //  Set<ApplicationUser> UsersThatFollowMe;
 
-//  Teams
-//  @OneToMany
-//  @JoinTable(
-//  name = "teamUps",
-//              joinColumns = { @JoinColumn(name = "primaryUser")},
-//              inverseJoinColumns = { @JoinColumn(name = "team")}
-//)
-//  Set<ApplicationUser> TeamsUsersOn;
 
 
 
