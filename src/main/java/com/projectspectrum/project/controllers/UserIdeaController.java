@@ -20,8 +20,6 @@ public class UserIdeaController {
     UserIdeaRepository userIdeaRepository;
     @Autowired
     ApplicationUserRepository applicationUserRepository;
-    @Autowired
-    TeamUpRepository teamUpRepository;
 
     @Autowired
     UserCommentRepository userCommentRepository;
@@ -31,10 +29,8 @@ public class UserIdeaController {
         Date date = new Date(System.currentTimeMillis());
         ApplicationUser fullUser = applicationUserRepository.findByUsername(user.getName());
         UserIdea userIdea = new UserIdea(title,body, date, fullUser);
-        TeamUp team = new TeamUp(userIdea,fullUser);
+        userIdea.setUpTeam(fullUser);
         userIdeaRepository.save(userIdea);
-        teamUpRepository.save(team);
-        userIdea.setTeam(team);
         userIdeaRepository.save(userIdea);
         return new RedirectView("profile");
     }
@@ -64,20 +60,29 @@ public class UserIdeaController {
 
         ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
         model.addAttribute("user", applicationUser);
-
+        if(userIdea.getTeam().contains(applicationUser)){
+            model.addAttribute("team", userIdea.getTeam());
+        }
 
         return "IdeaDetails";
     }
 
     @GetMapping("/teamUp/{id}")
     public RedirectView teamUp(@PathVariable long id, Principal principal, Model model) {
+
         UserIdea userIdea = userIdeaRepository.findById(id);
+
         ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
-        if (!userIdea.getTeam().getUsersOnTeam().contains(user)) {
-            userIdea.getTeam().setUsersOnTeam(user);
-        } else {
-            userIdea.getTeam().removeUsersOnTeam(user);
+
+        System.out.println(user.firstName);
+        if(!userIdea.getTeam().contains(user)) {
+            userIdea.setTeam(user);
         }
+        else {
+            userIdea.removeTeamMate(user);
+        }
+            userIdeaRepository.save(userIdea);
+
         return new RedirectView("/ideaPage/" + id);
     }
 

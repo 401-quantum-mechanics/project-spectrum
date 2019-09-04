@@ -2,6 +2,7 @@ package com.projectspectrum.project.models;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -15,8 +16,19 @@ public class UserIdea {
   public String body;
   public Date createAt;
 
-@OneToOne
-TeamUp team;
+//@OneToOne
+//TeamUp team;
+
+  @ManyToMany
+  @JoinTable(
+          // name is potato
+          name="team_up",
+          // join columns: column where user like and idea
+          joinColumns = { @JoinColumn(name="idea_id") },
+          // inverse: column where ideas are liked
+          inverseJoinColumns = { @JoinColumn(name="user_joined_id") }
+  )
+  Set<ApplicationUser> team;
 
   @ManyToMany
   @JoinTable(
@@ -46,7 +58,7 @@ ApplicationUser user;
     this.body      = body;
     this.createAt  = createAt;
     this.user = user;
-    this.team = null;
+//    this.team = null;
 
   }
 
@@ -66,8 +78,6 @@ ApplicationUser user;
     return this.body;
   }
 
-
-
   public Date getCreateAt() {
     return this.createAt;
   }
@@ -86,21 +96,28 @@ ApplicationUser user;
     return user;
   }
 
-
-  public TeamUp getTeam() {
-    return team;
-  }
-
   public Set<ApplicationUser> getLiking_users() {
     return liking_users;
-  }
-
-  public void setTeam(TeamUp team) {
-    this.team = team;
   }
 
   public void setCommentOnIdea(List<UserComment> commentOnIdea) {
     this.commentOnIdea = commentOnIdea;
 
+  }
+
+  public Set<ApplicationUser> getTeam() {
+    return team;
+  }
+
+  public void setUpTeam(ApplicationUser user) {
+    this.team = new HashSet<>();
+    this.team.add(user);
+  }
+
+  public void setTeam(ApplicationUser user) {
+    this.team.add(user);
+  }
+  public void removeTeamMate(ApplicationUser user) {
+    this.team.remove(user);
   }
 }
