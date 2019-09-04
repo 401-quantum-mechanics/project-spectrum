@@ -20,52 +20,52 @@
     <div class="row">
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
 
-                    <!-- Profile -->
-                    <div class="bg-white shadow rounded overflow-hidden">
-                        <div class="px-4 pt-0 pb-0 profile-background">
-                            <div class="media align-items-end profile-header">
-                                <div class="mr-3">
-                                    <img src="/user-icon.png" alt="User Icon"  width="200" class="mb-2 rounded-circle img-thumbnail">
-                                    <a href="/idea" class="btn btn-primary btn-sm btn-block"><i class="fas fa-user-plus"></i> Team Up</a>
-                                </div>
-                                <div class="media-body mb-5 text-white">
-                                    <h2 class="mt-0 mb-1" th:text="${user.firstName + ' ' + user.lastName}">Test User</h2>
-                                    <h5 class="small mb-4"><i class="far fa-envelope"></i> <span th:text="${user.username}">email@email.com</span></h5>
-                                </div>
-                            </div>
+            <!-- Profile -->
+            <div class="bg-white shadow rounded overflow-hidden">
+                <div class="px-4 pt-0 pb-0 profile-background">
+                    <div class="media align-items-end profile-header">
+                        <div class="mr-3">
+                            <img src="/user-icon.png" alt="User Icon"  width="200" class="mb-2 rounded-circle img-thumbnail">
+                            <a th:href="'/teamUp/' + ${idea_details.id}" class="btn btn-primary btn-sm btn-block"><i class="fas fa-user-plus"></i> Team Up</a>
                         </div>
-
-                        <div class="bg-light p-4 d-flex justify-content-end text-center">
-                            <ul class="list-inline mb-0">
-                                <li class="list-inline-item">
-                                    <h5 class="font-weight-bold mb-0 d-block" th:text="${ideas.size()}">10</h5><small class="text-muted"> Ideas</small>
-                                </li>
-                                <li class="list-inline-item">
-                                    <h5 class="font-weight-bold mb-0 d-block">4</h5><small class="text-muted"> Teams</small>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="row">
-                            <div class="col idea-details-readonly">
-                                <!-- Idea Details -->
-                                <div class="form-group">
-                                    <label for="title">Title</label>
-                                    <input type="text" readonly name="title" class="form-control" id="title" aria-describedby="title" th:value="${idea_details.title}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="idea">Idea</label>
-                                    <textarea name="idea" readonly class="form-control" id="idea" rows="10" th:text="${idea_details.body}"></textarea>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="info">Addition Info</label>
-                                    <textarea name="info" readonly class="form-control" id="info" rows="4">Additional info goes here . . .</textarea>
-                                </div>
-                            </div>
+                        <div class="media-body mb-5 text-white">
+                            <h2 class="mt-0 mb-1" th:text="${ideaUser.firstName + ' ' + ideaUser.lastName}">Test User</h2>
+                            <h5 class="small mb-4"><i class="far fa-envelope"></i> <span th:text="${ideaUser.username}">email@email.com</span></h5>
                         </div>
                     </div>
+                </div>
+
+                <div class="bg-light p-4 d-flex justify-content-end text-center">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item">
+                            <h5 class="font-weight-bold mb-0 d-block" th:text="${ideas.size()}">10</h5><small class="text-muted"> Ideas</small>
+                        </li>
+                        <li class="list-inline-item">
+                            <h5 class="font-weight-bold mb-0 d-block">4</h5><small class="text-muted"> Teams</small>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="row">
+                    <div class="col idea-details-readonly">
+                        <!-- Idea Details -->
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" readonly name="title" class="form-control" id="title" aria-describedby="title" th:value="${idea_details.title}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="idea">Idea</label>
+                            <textarea name="idea" readonly class="form-control" id="idea" rows="10" th:text="${idea_details.body}"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="info">Addition Info</label>
+                            <textarea name="info" readonly class="form-control" id="info" rows="4">Additional info goes here . . .</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -86,31 +86,14 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
 
-
                     <ul class="list-group list-group-flush">
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <a th:each="comment : ${comments}" href="#"
+                           class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Comment 1</h5>
-                                <small>3 days ago</small>
+                                <h5 class="mb-1" th:text="${comment.name}">Test 1</h5>
                             </div>
-                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Donec id elit non mi porta.</small>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Comment 2</h5>
-                                <small>3 days ago</small>
-                            </div>
-                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Donec id elit non mi porta.</small>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Comment 3</h5>
-                                <small>3 days ago</small>
-                            </div>
-                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Donec id elit non mi porta.</small>
+                            <p class="mb-1" th:text="${comment.body}"></p>
+                            <small th:text="${comment.createdAt}"></small>
                         </a>
                     </ul>
 

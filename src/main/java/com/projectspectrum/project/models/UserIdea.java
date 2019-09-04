@@ -47,6 +47,7 @@ ApplicationUser user;
     this.createAt  = createAt;
     this.user = user;
     this.team = null;
+
   }
 
 //  empty constructor
