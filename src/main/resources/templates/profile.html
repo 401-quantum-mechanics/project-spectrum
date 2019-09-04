@@ -19,63 +19,48 @@
 
     <div class="row profile-card-row">
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
-            <div class="card shadow">
-                <div class="row card-body">
 
-
-                    <div class="col-sm-6 text-center">
-                        <div class="card">
-                            <div class="card-body">
-                                <img src="/profile-icon.jpg" class="profile-icon" alt="...">
-                            </div>
+            <!-- Profile widget -->
+            <div class="bg-white shadow rounded overflow-hidden">
+                <div class="px-4 pt-0 pb-0 profile-background">
+                    <div class="media align-items-end profile-header">
+                        <div class="mr-3">
+<!--                            <img src="/profile-icon.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail">-->
+                            <img src="/profile-icon.jpg" alt="User Icon"  width="200" class="mb-2 rounded-circle img-thumbnail">
+                            <a href="/idea" class="btn btn-primary btn-sm btn-block"><i class="fas fa-plus"></i> Add Idea</a>
+                        </div>
+                        <div class="media-body mb-5 text-white">
+                            <h2 class="mt-0 mb-1" th:text="${user.firstName + ' ' + user.lastName}">Test User</h2>
+                            <h5 class="small mb-4"><i class="far fa-envelope"></i> <span th:text="${user.username}">email@email.com</span></h5>
                         </div>
                     </div>
+                </div>
 
-
-
-
-                    <div class="col-sm-6 profile-page-info">
-                        <div class="row">
-                            <div class="col">
-                                <h3 th:text="${user.firstName + ' ' + user.lastName}">Test
-                                    User</h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <a href="#"><p th:text="${user.username}">test@email
-                                    .com</p></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p><span>Ideas: </span><span
-                                        th:text="${ideas.size()}">
-                                </span></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p><span>Teams: </span><span>4
-                                </span></p>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <a href="/idea" class="btn btn-primary btn-block">Got an idea?</a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="bg-light p-4 d-flex justify-content-end text-center">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item">
+                            <h5 class="font-weight-bold mb-0 d-block" th:text="${ideas.size()}">10</h5><small class="text-muted"> Ideas</small>
+                        </li>
+                        <li class="list-inline-item">
+                            <h5 class="font-weight-bold mb-0 d-block">4</h5><small class="text-muted"> Teams</small>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
+
+
+
+
+
+
+
     <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="col-sm-12 col-md-6">
             <div class="card shadow">
-                <h5 class="card-header">Teams</h5>
+                <h5 class="card-header"><i class="fas fa-users"></i> Teams</h5>
                 <div class="card-body">
 
                     <ul class="list-group list-group-flush">
@@ -108,9 +93,9 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="col-sm-12 col-md-6">
             <div class="card shadow">
-                <h5 class="card-header">Ideas</h5>
+                <h5 class="card-header"><i class="far fa-lightbulb"></i> Ideas</h5>
                 <div class="card-body">
                     <ul th:if="${ideas}" class="list-group list-group-flush">
                         <a th:each="idea : ${ideas}" th:href="'/ideaPage/' + ${idea.id}"
@@ -126,40 +111,6 @@
                     <ul th:unless="${ideas.size() > 0}"
                         class="list-group list-group-flush">
                        <li class="list-group-item">No ideas have been submitted.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-6 col-md-4">
-            <div class="card shadow">
-                <h5 class="card-header">Followers</h5>
-                <div class="card-body">
-                    <ul class="list-group list-group-flush">
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Test 1</h5>
-                                <small>3 days ago</small>
-                            </div>
-                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Donec id elit non mi porta.</small>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Test 2</h5>
-                                <small>3 days ago</small>
-                            </div>
-                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Donec id elit non mi porta.</small>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Test 3</h5>
-                                <small>3 days ago</small>
-                            </div>
-                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Donec id elit non mi porta.</small>
-                        </a>
                     </ul>
                 </div>
             </div>
