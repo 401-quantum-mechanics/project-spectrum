@@ -85,6 +85,7 @@ ApplicationUser user;
     return user;
   }
 
+
   public TeamUp getTeam() {
     return team;
   }
@@ -95,5 +96,10 @@ ApplicationUser user;
 
   public void setTeam(TeamUp team) {
     this.team = team;
+  }
+
+  public void setCommentOnIdea(List<UserComment> commentOnIdea) {
+    this.commentOnIdea = commentOnIdea;
+
   }
 }

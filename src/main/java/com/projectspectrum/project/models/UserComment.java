@@ -11,8 +11,8 @@ public class UserComment {
   public long id;
   public String body;
   public Date createdAt;
-  public ApplicationUser commenting_user;
-
+  @OneToOne
+  ApplicationUser commenting_user;
   // The idea being commented on
   @ManyToOne
   UserIdea target_idea;
@@ -23,6 +23,10 @@ public class UserComment {
     this.commenting_user = user;
     this.body = body;
     this.createdAt = createdAt;
+  }
+
+  public UserComment(String body){
+    this.body = body;
   }
 
   public long getId() {

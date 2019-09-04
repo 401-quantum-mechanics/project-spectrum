@@ -31,8 +31,8 @@ public class ApplicationUser implements UserDetails {
 
 
 //  // Comments
-//  @OneToMany(fetch = FetchType.EAGER, mappedBy = "user_commenting")
-//  List<UserComment> userCommentList;
+  @OneToOne
+  UserComment comment;
 
 ////  Followers and following
 //  @OneToMany

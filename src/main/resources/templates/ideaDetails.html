@@ -19,73 +19,55 @@
 
     <div class="row">
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-            <div class="card idea-profile-card-row shadow">
-                <div class="card-body">
-                    <div class="row profile-info">
-                        <div class="col-sm-6 text-center">
-                            <div class="card">
-                                <div class="card-body">
-                                    <img src="/profile-icon.jpg" class="profile-icon-small" alt="...">
-                                    <button type="button" class="btn btn-primary btn-block">Team Up</button>
+
+                    <!-- Profile -->
+                    <div class="bg-white shadow rounded overflow-hidden">
+                        <div class="px-4 pt-0 pb-0 profile-background">
+                            <div class="media align-items-end profile-header">
+                                <div class="mr-3">
+                                    <img src="/user-icon.png" alt="User Icon"  width="200" class="mb-2 rounded-circle img-thumbnail">
+                                    <a href="/idea" class="btn btn-primary btn-sm btn-block"><i class="fas fa-user-plus"></i> Team Up</a>
+                                </div>
+                                <div class="media-body mb-5 text-white">
+                                    <h2 class="mt-0 mb-1" th:text="${user.firstName + ' ' + user.lastName}">Test User</h2>
+                                    <h5 class="small mb-4"><i class="far fa-envelope"></i> <span th:text="${user.username}">email@email.com</span></h5>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 profile-page-info">
-                            <div class="row">
-                                <div class="col">
-                                    <h1
-                                            th:text="${user.firstName + ' ' + user.lastName}">Test
-                                        User</h1>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <a
-                                            href="#"><p th:text="${user.username}">test@email
-                                        .com</p></a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <p><span>Total Projects Suggested: </span><span
-                                            th:text="${ideas.size()}">
-                                </span></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <p><span>Total Team Participation: </span><span>4
-                                </span></p>
-                                </div>
-                            </div>
+
+                        <div class="bg-light p-4 d-flex justify-content-end text-center">
+                            <ul class="list-inline mb-0">
+                                <li class="list-inline-item">
+                                    <h5 class="font-weight-bold mb-0 d-block" th:text="${ideas.size()}">10</h5><small class="text-muted"> Ideas</small>
+                                </li>
+                                <li class="list-inline-item">
+                                    <h5 class="font-weight-bold mb-0 d-block">4</h5><small class="text-muted"> Teams</small>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <!-- Idea Details -->
-                            <div class="form-group">
-                                <label for="title">Title</label>
-                                <input type="text" readonly name="title" class="form-control" id="title" aria-describedby="title" th:value="${idea_details.title}">
-                            </div>
+                        <div class="row">
+                            <div class="col idea-details-readonly">
+                                <!-- Idea Details -->
+                                <div class="form-group">
+                                    <label for="title">Title</label>
+                                    <input type="text" readonly name="title" class="form-control" id="title" aria-describedby="title" th:value="${idea_details.title}">
+                                </div>
 
-                            <div class="form-group">
-                                <label for="idea">Idea</label>
-                                <textarea name="idea" readonly class="form-control" id="idea" rows="10" th:text="${idea_details.body}"></textarea>
-                            </div>
+                                <div class="form-group">
+                                    <label for="idea">Idea</label>
+                                    <textarea name="idea" readonly class="form-control" id="idea" rows="10" th:text="${idea_details.body}"></textarea>
+                                </div>
 
-                            <div class="form-group">
-                                <label for="info">Addition Info</label>
-<!--                                <textarea name="info" readonly class="form-control" id="info" rows="4"><span th:text="${idea_details.info}"></span></textarea>-->
-                                <textarea name="info" readonly class="form-control" id="info" rows="4">Additional info goes here . . .</textarea>
+                                <div class="form-group">
+                                    <label for="info">Addition Info</label>
+                                    <textarea name="info" readonly class="form-control" id="info" rows="4">Additional info goes here . . .</textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
         </div>
     </div>
-
 
     <div class="row profile-card-row">
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
@@ -94,11 +76,12 @@
                     Comments
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="/comment/idea/" class="mb-4">
+                    <form method="POST" action="/ideaPage/comment" class="mb-4">
                         <div class="form-group">
                             <label for="body">Enter your comment here:</label>
-                            <textarea type="text" name="body" class="form-control" id="body" aria-describedby="body" maxlength="255" rows="2" required></textarea>
+                            <textarea name="body" class="form-control" id="body" aria-describedby="body" maxlength="255" rows="2" required></textarea>
                         </div>
+                        <input type="hidden" name="ideaId" th:value="${idea_details.id}"/>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

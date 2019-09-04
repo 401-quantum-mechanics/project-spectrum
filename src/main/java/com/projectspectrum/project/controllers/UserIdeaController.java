@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 public class UserIdeaController {
-//Repos to be autowired to the controller
+    //Repos to be autowired to the controller
     @Autowired
     UserIdeaRepository userIdeaRepository;
     @Autowired
@@ -23,8 +23,11 @@ public class UserIdeaController {
     @Autowired
     TeamUpRepository teamUpRepository;
 
+    @Autowired
+    UserCommentRepository userCommentRepository;
+
     @PostMapping("/createIdea")
-    public RedirectView createIdea(String body, String title, Principal user){
+    public RedirectView createIdea(String body, String title, Principal user) {
         Date date = new Date(System.currentTimeMillis());
         ApplicationUser fullUser = applicationUserRepository.findByUsername(user.getName());
         UserIdea userIdea = new UserIdea(title,body, date, fullUser);
@@ -33,33 +36,29 @@ public class UserIdeaController {
         teamUpRepository.save(team);
         userIdea.setTeam(team);
         userIdeaRepository.save(userIdea);
-
-
         return new RedirectView("profile");
     }
 
     @GetMapping("/ideas")
-    public String getListOfIdeas(Model model, Principal p){
-       ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
-       model.addAttribute("user", applicationUser);
-       List<UserIdea> ideasList =  userIdeaRepository.findAll();
-       model.addAttribute("ideas", ideasList);
-       return "allIdeas";
+    public String getListOfIdeas(Model model, Principal p) {
+        ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
+        model.addAttribute("user", applicationUser);
+        List<UserIdea> ideasList = userIdeaRepository.findAll();
+        model.addAttribute("ideas", ideasList);
+        return "allIdeas";
     }
 
     @GetMapping("/ideaPage/{id}")
-    public String getIdeaDetails(@PathVariable long id, Model model, Principal p){
-
+    public String getIdeaDetails(@PathVariable long id, Model model, Principal p) {
         List<UserIdea> userIdeas = userIdeas = applicationUserRepository.findByUsername(p.getName()).getIdeas();
         model.addAttribute("ideas", userIdeas);
-
         ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
         model.addAttribute("user", applicationUser);
-
         UserIdea userIdea = userIdeaRepository.findById(id);
         model.addAttribute("idea_details", userIdea);
         return "IdeaDetails";
     }
+
     @GetMapping("/teamUp/{id}")
     public RedirectView teamUp(@PathVariable long id, Principal principal, Model model){
         UserIdea userIdea = userIdeaRepository.findById(id);
@@ -71,6 +70,18 @@ public class UserIdeaController {
             userIdea.getTeam().removeUsersOnTeam(user);
         }
         return new RedirectView("/ideaPage/"+ id);
+
+
+    @PostMapping("/ideaPage/comment")
+
+    public RedirectView createComment(String body, long ideaId, Principal p) {
+        Date date = new Date(System.currentTimeMillis());
+        ApplicationUser fullUser = applicationUserRepository.findByUsername(p.getName());
+        UserIdea userIdea = userIdeaRepository.findById(ideaId);
+        UserComment userComment = new UserComment(userIdea, body, date, fullUser);
+        userCommentRepository.save(userComment);
+        return new RedirectView("/profile");
+
     }
 
 }
