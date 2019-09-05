@@ -75,13 +75,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="idea">Idea</label>
-                            <textarea name="idea" readonly class="form-control" id="idea" rows="10" th:text="${idea_details.body}"></textarea>
+                            <label for="idea">Body</label>
+                            <textarea name="idea" readonly class="form-control" id="idea" rows="4" th:text="${idea_details.body}"></textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="info">Addition Info</label>
-                            <textarea name="info" readonly class="form-control" id="info" rows="4">Additional info goes here . . .</textarea>
+                            <label for="info">Additional Info</label>
+                            <textarea name="info" readonly class="form-control" id="info" rows="2">Additional info goes here . . .</textarea>
                         </div>
                     </div>
                 </div>
@@ -101,26 +101,65 @@
                             <label for="body">Enter your comment here:</label>
                             <textarea name="body" class="form-control" id="body" aria-describedby="body" maxlength="255" rows="2" required></textarea>
                         </div>
-                        <input type="hidden" name="ideaId" th:value="${idea_details.id}"/>
+                        <input type="hidden" name="ideaId" th:value="${idea_details.id}">
 
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
 
                     <ul class="list-group list-group-flush">
-                        <a th:each="comment : ${comments}" href="#"
-                           class="list-group-item list-group-item-action flex-column align-items-start">
+                        <span th:each="comment : ${comments}"
+                           class="list-group-item flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1" th:text="${comment.name}">Test 1</h5>
+                                <span>
+                                    <a data-toggle="modal" th:data-target="'#' + ${comment.id}">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a th:href="'/commentDelete/' + ${comment.id}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </span>
                             </div>
                             <p class="mb-1" th:text="${comment.body}"></p>
                             <small th:text="${comment.createdAt}"></small>
-                        </a>
-                    </ul>
 
+                            <!-- Modal -->
+                            <div class="modal fade" th:id="${comment.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form method="POST" action="/commentUpdate">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+
+                                                    <label for="bodyModal">Comment:</label>
+                                                    <input type="text" name="body" class="form-control" th:value="${comment.body}"
+                                                           id="bodyModal" aria-describedby="body" required>
+                                                </div>
+                                                <input type="hidden" name="ideaId" th:value="${idea_details.id}">
+                                                <input type="hidden" name="commentId" th:value="${comment.id}" >
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </span>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+
+
+
 
 </div>
 

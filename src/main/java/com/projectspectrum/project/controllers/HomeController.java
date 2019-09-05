@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import java.security.Principal;
 import java.util.List;
 
@@ -64,6 +66,22 @@ public class HomeController {
 
 
     return "ideaDetails";
+  }
+
+
+  @GetMapping("/idea/update/{id}")
+  public String getIdeaUpdatePage(@PathVariable long id, Principal p, Model m) {
+    ApplicationUser applicationUser = null;
+    UserIdea userIdea = userIdeaRepository.findById(id);
+    m.addAttribute("idea_details", userIdea);
+
+    if(p!=null){
+      applicationUser = applicationUserRepository.findByUsername(p.getName());
+    }
+
+    m.addAttribute("user", applicationUser);
+
+    return "ideaUpdate";
   }
 
   @GetMapping("/aboutus")

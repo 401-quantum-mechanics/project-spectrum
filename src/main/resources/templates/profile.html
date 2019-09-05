@@ -87,14 +87,23 @@
                 <h5 class="card-header"><i class="far fa-lightbulb"></i> Ideas</h5>
                 <div class="card-body">
                     <ul th:if="${ideas}" class="list-group list-group-flush">
-                        <a th:each="idea : ${ideas}" th:href="'/ideaPage/' + ${idea.id}"
-                            class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1" th:text="${idea.title}">Test 1</h5>
+                        <span th:each="idea : ${ideas}">
+                            <div class="text-right edit-link">
+                                <a th:href="'/idea/update/' + ${idea.id}">
+                                    <i class="fas fa-edit"></i>
+                                </a>
                             </div>
-                            <p class="mb-1" th:text="${idea.body}"></p>
-                            <small th:text="${idea.createAt}"></small>
-                        </a>
+
+                            <a  th:href="'/ideaPage/' + ${idea.id}"
+                                class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1" th:text="${idea.title}">Test 1</h5>
+                                </div>
+                                <p class="mb-1" th:text="${idea.body}"></p>
+                                <small th:text="${idea.createAt}"></small>
+                            </a>
+                        </span>
+
                     </ul>
 
                     <ul th:unless="${ideas.size() > 0}"
