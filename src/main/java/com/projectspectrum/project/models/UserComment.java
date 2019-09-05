@@ -57,5 +57,21 @@ public class UserComment {
   public UserIdea getTarget_idea() {
     return target_idea;
   }
+
+  public void setBody(String body) {
+    this.body = body;
+  }
+
+  public void setCreatedAt(Date createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getName() {
+    return name;
+  }
 }
 

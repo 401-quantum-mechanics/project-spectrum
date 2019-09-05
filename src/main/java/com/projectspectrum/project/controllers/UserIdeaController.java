@@ -53,7 +53,7 @@ public class UserIdeaController {
         ApplicationUser ideaUser = userIdea.getUser();
         model.addAttribute("ideaUser", ideaUser);
 
-        List<UserIdea> userIdeas = applicationUserRepository.findByUsername(p.getName()).getIdeas();
+        Set<UserIdea> userIdeas = applicationUserRepository.findByUsername(p.getName()).getIdeas();
         model.addAttribute("ideas", userIdeas);
 
         Set<UserComment> comments = userIdea.getCommentOnIdea();
@@ -125,6 +125,7 @@ public class UserIdeaController {
         UserIdea userIdea = userIdeaRepository.findById(ideaId);
         userIdea.setTitle(title);
         userIdea.setBody(body);
+        userIdeaRepository.save(userIdea);
         return new RedirectView("/profile");
     }
     @PostMapping("/ideaDelete")
@@ -133,6 +134,18 @@ public class UserIdeaController {
         userIdeaRepository.delete(userIdea);
         return new RedirectView("/profile");
     }
-
+    @PostMapping("/commentUpdate")
+    public RedirectView updateComment(long commentId, long ideaId, String body){
+        UserComment userComment = userCommentRepository.findById(commentId);
+        userComment.setBody(body);
+        userCommentRepository.save(userComment);
+        return new RedirectView("/ideaPage/" + ideaId);
+    }
+    @PostMapping("/commentDelte")
+    public RedirectView deleteComment(long commentId, long ideaId){
+        UserComment userComment = userCommentRepository.findById(commentId);
+        userCommentRepository.delete(userComment);
+        return new RedirectView("/ideaPage" + ideaId);
+    }
 
 }
