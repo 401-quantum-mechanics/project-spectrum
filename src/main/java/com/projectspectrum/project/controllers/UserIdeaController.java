@@ -68,7 +68,6 @@ public class UserIdeaController {
 
         model.addAttribute("teamForSize", userIdea.getTeam());
 
-
         return "ideaDetails";
     }
 
