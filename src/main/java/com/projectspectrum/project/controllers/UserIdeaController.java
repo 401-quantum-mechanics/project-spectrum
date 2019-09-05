@@ -67,7 +67,7 @@ public class UserIdeaController {
         model.addAttribute("teamForSize", userIdea.getTeam());
 
 
-        return "IdeaDetails";
+        return "ideaDetails";
     }
 
     @GetMapping("/teamUp/{id}")
