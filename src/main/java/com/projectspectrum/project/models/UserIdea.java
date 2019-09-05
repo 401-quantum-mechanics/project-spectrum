@@ -13,6 +13,7 @@ public class UserIdea {
   public long id;
   public String title;
   public String body;
+  public String info;
   public Date createAt;
 
 //@OneToOne
@@ -35,9 +36,9 @@ public class UserIdea {
           // name is potato
           name="likes",
           // join columns: column where user like and idea
-          joinColumns = { @JoinColumn(name="user_liking") },
+          joinColumns = { @JoinColumn(name="idea_id") },
           // inverse: column where ideas are liked
-          inverseJoinColumns = { @JoinColumn(name="idea_being_liked") }
+          inverseJoinColumns = { @JoinColumn(name="user_liking_idea_id") }
   )
   Set<ApplicationUser> liking_users;
 
@@ -53,10 +54,11 @@ ApplicationUser user;
 
 
 //  constructor
-  public UserIdea(String title, String body, Date createAt, ApplicationUser user) {
+  public UserIdea(String title, String body, Date createAt,String info, ApplicationUser user) {
     this.title     = title;
     this.body      = body;
     this.createAt  = createAt;
+    this.info = info;
     this.user = user;
 //    this.team = null;
 
@@ -119,5 +121,37 @@ ApplicationUser user;
   }
   public void removeTeamMate(ApplicationUser user) {
     this.team.remove(user);
+  }
+
+  public void setUpLiking_users(ApplicationUser user) {
+    this.liking_users = new HashSet<>();
+    this.liking_users.add(user);
+  }
+  public void setLiking_users(ApplicationUser user) {
+    this.liking_users.add(user);
+  }
+
+  public void removeLike(ApplicationUser user) {
+    this.liking_users.remove(user);
+  }
+
+  public void setUser(ApplicationUser user) {
+    this.user = user;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public void setBody(String body) {
+    this.body = body;
+  }
+
+  public void setCreateAt(Date createAt) {
+    this.createAt = createAt;
   }
 }
