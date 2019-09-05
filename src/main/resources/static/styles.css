@@ -141,3 +141,8 @@ body {
     top: 30px;
     z-index: 1000;
 }
+
+.fas.fa-thumbs-up, .far.fa-thumbs-up  {
+    position: relative;
+    z-index: 1000;
+}

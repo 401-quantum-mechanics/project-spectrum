@@ -44,8 +44,29 @@
                     </div>
                 </div>
 
+
                 <div class="bg-light p-4 d-flex justify-content-end text-center">
                     <ul class="list-inline mb-0">
+
+                        <span th:if="${user.id != idea_details.user.id}">
+                            <span th:if="${like}">
+                                <li class="list-inline-item">
+                                    <a class="font-weight-bold mb-0 d-block" th:href="'/likeIdea/' + ${idea_details.id}"><i class="fas fa-thumbs-up"></i></a>
+                                </li>
+                            </span>
+                            <span th:unless="${like}">
+                                <li  class="list-inline-item">
+                                    <a class="font-weight-bold mb-0 d-block" th:href="'/likeIdea/' + ${idea_details.id}"><i class="far fa-thumbs-up"></i></a>
+                                </li>
+                            </span>
+                        </span>
+
+
+
+
+                        <li  class="list-inline-item">
+                            <h5 class="font-weight-bold mb-0 d-block" th:text="${likesForSize}"></h5><small class="text-muted"> Likes</small>
+                        </li>
                         <li class="list-inline-item">
                             <h5 class="font-weight-bold mb-0 d-block" th:text="${ideas.size()}">10</h5><small class="text-muted"> Ideas</small>
                         </li>
@@ -100,7 +121,7 @@
                            class="list-group-item flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1" th:text="${comment.name}">Test 1</h5>
-                                <span>
+                                <span th:if="${comment.commenting_user.id == user.id}">
                                     <a data-toggle="modal" th:data-target="'#' + ${comment.id}">
                                         <i class="fas fa-edit"></i>
                                     </a>
@@ -146,10 +167,6 @@
             </div>
         </div>
     </div>
-
-
-
-
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
