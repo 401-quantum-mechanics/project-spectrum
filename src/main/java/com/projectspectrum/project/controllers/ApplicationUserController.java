@@ -18,6 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class ApplicationUserController {
@@ -73,7 +74,7 @@ public class ApplicationUserController {
   @GetMapping("/profile")
   public String getProfile(Principal p, Model m){
     ApplicationUser applicationUser = null;
-    List<UserIdea> userIdeas = null;
+    Set<UserIdea> userIdeas = null;
 
     if(p!=null){
       applicationUser = applicationUserRepository.findByUsername(p.getName());

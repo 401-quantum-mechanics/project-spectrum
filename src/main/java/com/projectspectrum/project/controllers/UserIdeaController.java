@@ -53,8 +53,9 @@ public class UserIdeaController {
         ApplicationUser ideaUser = userIdea.getUser();
         model.addAttribute("ideaUser", ideaUser);
 
-        List<UserIdea> userIdeas = applicationUserRepository.findByUsername(p.getName()).getIdeas();
+        Set<UserIdea> userIdeas = applicationUserRepository.findByUsername(p.getName()).getIdeas();
         model.addAttribute("ideas", userIdeas);
+        System.out.println("******************************" + userIdeas);
 
         Set<UserComment> comments = userIdea.getCommentOnIdea();
         System.out.println("$$$$$$$$$$$$$$$" + comments);
