@@ -12,6 +12,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.security.Principal;
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class UserIdeaController {
@@ -55,7 +56,8 @@ public class UserIdeaController {
         List<UserIdea> userIdeas = applicationUserRepository.findByUsername(p.getName()).getIdeas();
         model.addAttribute("ideas", userIdeas);
 
-        List<UserComment> comments = userIdea.getCommentOnIdea();
+        Set<UserComment> comments = userIdea.getCommentOnIdea();
+        System.out.println("$$$$$$$$$$$$$$$" + comments);
         model.addAttribute("comments", comments);
 
         ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());

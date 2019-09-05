@@ -43,7 +43,7 @@ public class UserIdea {
 
 // List of comments on the idea
 @OneToMany(fetch = FetchType.EAGER, mappedBy = "target_idea")
-List<UserComment> commentOnIdea;
+Set<UserComment> commentOnIdea;
 //  Database connections
 @ManyToOne
 ApplicationUser user;
@@ -88,7 +88,7 @@ ApplicationUser user;
       , this.createAt);
   }
 
-  public List<UserComment> getCommentOnIdea() {
+  public Set<UserComment> getCommentOnIdea() {
     return commentOnIdea;
   }
 
@@ -100,7 +100,7 @@ ApplicationUser user;
     return liking_users;
   }
 
-  public void setCommentOnIdea(List<UserComment> commentOnIdea) {
+  public void setCommentOnIdea(Set<UserComment> commentOnIdea) {
     this.commentOnIdea = commentOnIdea;
 
   }
