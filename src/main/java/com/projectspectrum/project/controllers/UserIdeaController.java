@@ -26,12 +26,12 @@ public class UserIdeaController {
     UserCommentRepository userCommentRepository;
 
     @PostMapping("/createIdea")
-    public RedirectView createIdea(String body, String title, Principal user) {
+    public RedirectView createIdea(String body, String title, String info,Principal user) {
         Date date = new Date(System.currentTimeMillis());
         ApplicationUser fullUser = applicationUserRepository.findByUsername(user.getName());
-        UserIdea userIdea = new UserIdea(title,body, date, fullUser);
+        UserIdea userIdea = new UserIdea(title, body, date, info,fullUser);
         userIdea.setUpTeam(fullUser);
-        userIdeaRepository.save(userIdea);
+        userIdea.setUpLiking_users(fullUser);
         userIdeaRepository.save(userIdea);
         return new RedirectView("profile");
     }
@@ -57,16 +57,19 @@ public class UserIdeaController {
         model.addAttribute("ideas", userIdeas);
 
         Set<UserComment> comments = userIdea.getCommentOnIdea();
-        System.out.println("$$$$$$$$$$$$$$$" + comments);
         model.addAttribute("comments", comments);
 
         ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
         model.addAttribute("user", applicationUser);
-        if(userIdea.getTeam().contains(applicationUser)){
+        if (userIdea.getTeam().contains(applicationUser)) {
             model.addAttribute("team", userIdea.getTeam());
         }
-
         model.addAttribute("teamForSize", userIdea.getTeam());
+        if (userIdea.getLiking_users().contains(applicationUser)) {
+            model.addAttribute("like", userIdea.getLiking_users());
+        }
+        int numberOfLikes = userIdea.getLiking_users().size() - 1;
+        model.addAttribute("likesForSize", numberOfLikes);
 
 
         return "ideaDetails";
@@ -80,13 +83,12 @@ public class UserIdeaController {
         ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
 
         System.out.println(user.firstName);
-        if(!userIdea.getTeam().contains(user)) {
+        if (!userIdea.getTeam().contains(user)) {
             userIdea.setTeam(user);
-        }
-        else {
+        } else {
             userIdea.removeTeamMate(user);
         }
-            userIdeaRepository.save(userIdea);
+        userIdeaRepository.save(userIdea);
 
         return new RedirectView("/ideaPage/" + id);
     }
@@ -101,5 +103,36 @@ public class UserIdeaController {
         return new RedirectView("/profile");
 
     }
+
+    @GetMapping("/likeIdea/{id}")
+    public RedirectView likeIdea(@PathVariable long id, Principal principal, Model model) {
+
+        UserIdea userIdea = userIdeaRepository.findById(id);
+        ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
+        System.out.println(user.firstName);
+        if (!userIdea.getLiking_users().contains(user)) {
+            userIdea.setLiking_users(user);
+        } else {
+            userIdea.removeLike(user);
+        }
+        userIdeaRepository.save(userIdea);
+
+        return new RedirectView("/ideaPage/" + id);
+    }
+
+    @PostMapping("/ideaUpdate")
+    public RedirectView updatingIdea(long ideaId, String body, String title){
+        UserIdea userIdea = userIdeaRepository.findById(ideaId);
+        userIdea.setTitle(title);
+        userIdea.setBody(body);
+        return new RedirectView("/profile");
+    }
+    @PostMapping("/ideaDelete")
+    public RedirectView deleteIdea(long ideaId){
+        UserIdea userIdea = userIdeaRepository.findById(ideaId);
+        userIdeaRepository.delete(userIdea);
+        return new RedirectView("/profile");
+    }
+
 
 }

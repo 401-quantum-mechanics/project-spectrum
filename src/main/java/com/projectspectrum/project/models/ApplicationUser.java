@@ -25,11 +25,13 @@ public class ApplicationUser implements UserDetails {
 
 //  Ideas
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-  List<UserIdea> userIdeaList;
+  Set<UserIdea> userIdeaList;
 // This is many to one for users to team up
   @ManyToMany(mappedBy = "team")
   Set<UserIdea> teamUpIdeas;
-
+//This is a many to many for a user to be able to like an idea
+@ManyToMany(mappedBy = "liking_users")
+Set<UserIdea> likedIdeas;
 
 //  // Comments
   @OneToOne
@@ -54,7 +56,7 @@ public class ApplicationUser implements UserDetails {
     return this.id;
   }
 
-  public List<UserIdea> getIdeas(){
+  public Set<UserIdea> getIdeas(){
     return this.userIdeaList;
   }
 
@@ -104,7 +106,7 @@ public class ApplicationUser implements UserDetails {
     return lastName;
   }
 
-  public List<UserIdea> getUserIdeaList() {
+  public Set<UserIdea> getUserIdeaList() {
     return userIdeaList;
   }
 
