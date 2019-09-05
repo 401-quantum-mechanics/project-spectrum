@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class HomeController {
@@ -52,7 +53,7 @@ public class HomeController {
   @GetMapping("/idea/details")
   public String getIdeaDetailsPage(Principal p, Model m) {
     ApplicationUser applicationUser = null;
-    List<UserIdea> userIdeas = null;
+    Set<UserIdea> userIdeas = null;
 
     if(p!=null){
       applicationUser = applicationUserRepository.findByUsername(p.getName());
