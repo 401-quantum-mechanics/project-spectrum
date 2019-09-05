@@ -14,6 +14,7 @@ public class UserComment {
   public String name;
   @OneToOne
   ApplicationUser commenting_user;
+
   // The idea being commented on
   @ManyToOne
   UserIdea target_idea;

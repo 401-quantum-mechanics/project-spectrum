@@ -17,7 +17,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -75,14 +74,18 @@ public class ApplicationUserController {
   public String getProfile(Principal p, Model m){
     ApplicationUser applicationUser = null;
     Set<UserIdea> userIdeas = null;
+    Set<UserIdea> userTeams = null;
 
     if(p!=null){
       applicationUser = applicationUserRepository.findByUsername(p.getName());
       userIdeas = applicationUserRepository.findByUsername(p.getName()).getIdeas();
+      userTeams = applicationUser.getTeamUpIdeas();
 
     }
+    System.out.println("******************************************" + userTeams);
     m.addAttribute("user", applicationUser);
     m.addAttribute("ideas", userIdeas);
+    m.addAttribute("teams", userTeams);
     return "profile";
   }
   

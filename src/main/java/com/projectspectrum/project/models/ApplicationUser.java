@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 
@@ -26,6 +25,7 @@ public class ApplicationUser implements UserDetails {
 //  Ideas
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
   Set<UserIdea> userIdeaList;
+
 // This is many to one for users to team up
   @ManyToMany(mappedBy = "team")
   Set<UserIdea> teamUpIdeas;
@@ -109,4 +109,7 @@ public class ApplicationUser implements UserDetails {
   }
 
 
+  public Set<UserIdea> getTeamUpIdeas() {
+    return teamUpIdeas;
+  }
 }

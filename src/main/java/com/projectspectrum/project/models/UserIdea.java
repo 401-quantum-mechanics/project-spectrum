@@ -3,7 +3,6 @@ package com.projectspectrum.project.models;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,6 +27,7 @@ public class UserIdea {
           // inverse: column where ideas are liked
           inverseJoinColumns = { @JoinColumn(name="user_joined_id") }
   )
+
   Set<ApplicationUser> team;
 
   @ManyToMany
