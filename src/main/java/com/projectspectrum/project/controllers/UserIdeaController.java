@@ -99,7 +99,7 @@ public class UserIdeaController {
         UserIdea userIdea = userIdeaRepository.findById(ideaId);
         UserComment userComment = new UserComment(userIdea, body, date, fullUser);
         userCommentRepository.save(userComment);
-        return new RedirectView("/profile");
+        return new RedirectView("/ideaPage/" + ideaId);
 
     }
 
@@ -140,11 +140,12 @@ public class UserIdeaController {
         userCommentRepository.save(userComment);
         return new RedirectView("/ideaPage/" + ideaId);
     }
-    @PostMapping("/commentDelete")
-    public RedirectView deleteComment(long commentId, long ideaId){
+    @GetMapping("/commentDelete/{commentId}")
+    public RedirectView deleteComment(@PathVariable long commentId){
         UserComment userComment = userCommentRepository.findById(commentId);
+        UserIdea userIdea = userComment.getTarget_idea();
         userCommentRepository.delete(userComment);
-        return new RedirectView("/ideaPage" + ideaId);
+        return new RedirectView("/ideaPage/" + userIdea.id);
     }
 
 }
