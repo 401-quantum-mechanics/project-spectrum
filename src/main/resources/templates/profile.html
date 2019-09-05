@@ -39,7 +39,7 @@
                             <h5 class="font-weight-bold mb-0 d-block" th:text="${ideas.size()}">10</h5><small class="text-muted"> Ideas</small>
                         </li>
                         <li class="list-inline-item">
-                            <h5 class="font-weight-bold mb-0 d-block">4</h5><small class="text-muted"> Teams</small>
+                            <h5 class="font-weight-bold mb-0 d-block" th:text="${teams.size()}">4</h5><small class="text-muted"> Teams</small>
                         </li>
                     </ul>
                 </div>
@@ -53,30 +53,16 @@
                 <h5 class="card-header"><i class="fas fa-users"></i> Team Ups</h5>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
-
-                          <span th:each="team : ${teams}">
-
-                              <a  th:href="'/ideaPage/' + ${team.id}"
-                               class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 th:text="'Project: ' + ${team.title}" class="mb-1">Test 1</h5>
-                                <small th:text="'Start Date: ' + ${team.createAt}">3 days ago</small>
-                            </div>
-                            <p th:text="'Description: ' + ${team.body}" class="mb-1">Donec id elit non mi porta
-                                gravida
-                                at eget
-                                metus.
-                                Maecenas sed
-                                diam
-                                eget risus varius blandit.</p>
-                            <small th:text="'Owner: ' + ${team.user.firstName}">Donec id elit non mi porta
-                                .</small>
-                        </a>
-
-
-                          </span>
-
-
+                        <span th:each="team : ${teams}" >
+                            <a  th:href="'/ideaPage/' + ${team.id}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 th:text="'Project: ' + ${team.title}" class="mb-1">Test 1</h5>
+                                    <small th:text="'Start Date: ' + ${team.createAt}">3 days ago</small>
+                                </div>
+                                <p th:text="'Description: ' + ${team.body}" class="mb-1"></p>
+                                <small th:text="'Owner: ' + ${team.user.firstName}"></small>
+                            </a>
+                        </span>
                     </ul>
                 </div>
             </div>
@@ -103,7 +89,6 @@
                                 <small th:text="${idea.createAt}"></small>
                             </a>
                         </span>
-
                     </ul>
 
                     <ul th:unless="${ideas.size() > 0}"

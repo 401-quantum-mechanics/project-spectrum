@@ -50,17 +50,6 @@
                             <h5 class="font-weight-bold mb-0 d-block" th:text="${ideas.size()}">10</h5><small class="text-muted"> Ideas</small>
                         </li>
                         <li class="list-inline-item">
-<!--                            <span th:if="${team}">-->
-<!--                                <a th:href="'/teamUp/' + ${idea_details.id}" class="btn btn-primary btn-sm btn-block">-->
-<!--                                    <i class="fas fa-user-minus"></i> Leave Team-->
-<!--                                </a>-->
-<!--                            </span>-->
-<!--                            <span th:unless="${team}">-->
-<!--                                <a th:href="'/teamUp/' + ${idea_details.id}" class="btn btn-primary btn-sm btn-block">-->
-<!--                                    <i class="fas fa-user-plus"></i> Join Team-->
-<!--                                </a>-->
-<!--                            </span>-->
-
                             <h5 class="font-weight-bold mb-0 d-block" th:text="${teamForSize.size()}">4</h5><small class="text-muted"> Teams</small>
                         </li>
                     </ul>
@@ -75,13 +64,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="idea">Body</label>
+                            <label for="idea">Description</label>
                             <textarea name="idea" readonly class="form-control" id="idea" rows="4" th:text="${idea_details.body}"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="info">Additional Info</label>
-                            <textarea name="info" readonly class="form-control" id="info" rows="2">Additional info goes here . . .</textarea>
+                            <textarea name="info" readonly class="form-control" id="info" rows="2" th:text="${idea_details.info}"></textarea>
                         </div>
                     </div>
                 </div>
