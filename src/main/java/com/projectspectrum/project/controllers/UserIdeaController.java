@@ -140,7 +140,7 @@ public class UserIdeaController {
         userCommentRepository.save(userComment);
         return new RedirectView("/ideaPage/" + ideaId);
     }
-    @PostMapping("/commentDelte")
+    @PostMapping("/commentDelete")
     public RedirectView deleteComment(long commentId, long ideaId){
         UserComment userComment = userCommentRepository.findById(commentId);
         userCommentRepository.delete(userComment);
