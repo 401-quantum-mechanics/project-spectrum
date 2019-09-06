@@ -82,7 +82,6 @@ public class ApplicationUserController {
       userTeams = applicationUser.getTeamUpIdeas();
 
     }
-    System.out.println("******************************************" + userTeams);
     m.addAttribute("user", applicationUser);
     m.addAttribute("ideas", userIdeas);
     m.addAttribute("teams", userTeams);

@@ -96,5 +96,24 @@ public class HomeController {
     return "aboutUs";
   }
 
+  @GetMapping("/team/{id}")
+  public String getTeamPage(@PathVariable long id, Principal p, Model m) {
+    ApplicationUser applicationUser = null;
+
+    UserIdea userIdea = userIdeaRepository.findById(id);
+    m.addAttribute("ideaDetails", userIdea);
+
+    System.out.println("$$$$$$$$$$$$ TEAM $$$$$$$$$$ " + userIdea.getTeam());
+    m.addAttribute("team", userIdea.getTeam());
+
+
+
+    if(p!=null){
+      applicationUser = applicationUserRepository.findByUsername(p.getName());
+    }
+    m.addAttribute("user", applicationUser);
+    return "team";
+  }
+
 
 }

@@ -81,7 +81,6 @@ public class UserIdeaController {
 
         ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
 
-        System.out.println(user.firstName);
         if (!userIdea.getTeam().contains(user)) {
             userIdea.setTeam(user);
         } else {

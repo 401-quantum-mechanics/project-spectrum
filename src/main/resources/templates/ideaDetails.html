@@ -25,7 +25,7 @@
                 <div class="px-4 pt-0 pb-0 profile-background">
                     <div class="media align-items-end profile-header">
                         <div class="mr-3">
-                            <img src="/user-icon.png" alt="User Icon"  width="200" class="mb-2 rounded-circle img-thumbnail">
+                            <img src="/profile-icon.png" alt="User Icon"  width="200" class="mb-2 rounded-circle img-thumbnail">
                             <span th:if="${team}">
                                 <a th:href="'/teamUp/' + ${idea_details.id}" class="btn btn-primary btn-sm btn-block">
                                     <i class="fas fa-user-minus"></i> Leave Team
@@ -39,7 +39,7 @@
                         </div>
                         <div class="media-body mb-5 text-white">
                             <h2 class="mt-0 mb-1" th:text="${ideaUser.firstName + ' ' + ideaUser.lastName}">Test User</h2>
-                            <h5 class="small mb-4"><i class="far fa-envelope"></i> <span th:text="${ideaUser.username}">email@email.com</span></h5>
+                            <h5 class="small mb-4"><i class="fas fa-envelope"></i> <span th:text="${ideaUser.username}">email@email.com</span></h5>
                         </div>
                     </div>
                 </div>
@@ -61,9 +61,6 @@
                             </span>
                         </span>
 
-
-
-
                         <li  class="list-inline-item">
                             <h5 class="font-weight-bold mb-0 d-block" th:text="${likesForSize}"></h5><small class="text-muted"> Likes</small>
                         </li>
@@ -71,7 +68,7 @@
                             <h5 class="font-weight-bold mb-0 d-block" th:text="${ideas.size()}">10</h5><small class="text-muted"> Ideas</small>
                         </li>
                         <li class="list-inline-item">
-                            <h5 class="font-weight-bold mb-0 d-block" th:text="${teamForSize.size()}">4</h5><small class="text-muted"> Teams</small>
+                            <h5 class="font-weight-bold mb-0 d-block" th:text="${teamForSize.size()}">4</h5><small class="text-muted"> Team</small>
                         </li>
                     </ul>
                 </div>
@@ -80,17 +77,17 @@
                     <div class="col idea-details-readonly">
                         <!-- Idea Details -->
                         <div class="form-group">
-                            <label for="title">Title</label>
+                            <label for="title"><strong>Title</strong></label>
                             <input type="text" readonly name="title" class="form-control" id="title" aria-describedby="title" th:value="${idea_details.title}">
                         </div>
 
                         <div class="form-group">
-                            <label for="idea">Description</label>
+                            <label for="idea"><strong>Description</strong></label>
                             <textarea name="idea" readonly class="form-control" id="idea" rows="4" th:text="${idea_details.body}"></textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="info">Additional Info</label>
+                            <label for="info"><strong>Additional Info</strong></label>
                             <textarea name="info" readonly class="form-control" id="info" rows="2" th:text="${idea_details.info}"></textarea>
                         </div>
                     </div>
@@ -103,13 +100,12 @@
         <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
             <div class="card shadow">
                 <div class="card-header">
-                    Comments
+                    <i class="fas fa-comments"></i> Comments
                 </div>
                 <div class="card-body">
                     <form method="POST" action="/ideaPage/comment" class="mb-4">
                         <div class="form-group">
-                            <label for="body">Enter your comment here:</label>
-                            <textarea name="body" class="form-control" id="body" aria-describedby="body" maxlength="250" rows="2" required></textarea>
+                            <textarea name="body" class="form-control" id="body" aria-describedby="body" placeholder="Enter your comment here . . ." maxlength="250" rows="2" required></textarea>
                         </div>
                         <input type="hidden" name="ideaId" th:value="${idea_details.id}">
 
