@@ -12,7 +12,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 offset-sm-3 text-center page-title">
-            <h1>Login</h1>
+            <h1>Team</h1>
             <hr>
         </div>
     </div>
@@ -21,26 +21,12 @@
         <div class="col-sm-10 offset-sm-1 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
             <div class="card shadow">
                 <div class="card-body user-form">
-                    <!-- Login Form -->
-                    <form method="POST" action="/login">
-                        <div class="form-group">
-                            <input type="text" name="username" class="form-control"
-                                   id="email" aria-describedby="email" placeholder="Email" required>
-                        </div>
-
-                        <div class="form-group">
-                            <input type="password" name="password" class="form-control" id="password" aria-describedby="password" placeholder="Password" required>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                            </div>
-                            <div class="col-sm-6">
-                                <a href="/signup" class="btn btn-outline-primary btn-block">Sign Up?</a>
-                            </div>
-                        </div>
-                    </form>
+                    <div class="list-group list-group-flush">
+                        <a href="#" th:each="user : ${team}" class="list-group-item list-group-item-action">
+                            <h3 class="mb-1" th:text="${user.firstName + ' ' + user.lastName}">List group item heading</h3>
+                            <span><i class="fas fa-envelope"></i> <span class="mb-1" th:text="${user.username}">List group item heading</span></span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
