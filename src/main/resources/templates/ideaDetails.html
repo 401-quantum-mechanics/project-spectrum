@@ -105,7 +105,7 @@
                 <div class="card-body">
                     <form method="POST" action="/ideaPage/comment" class="mb-4">
                         <div class="form-group">
-                            <textarea name="body" class="form-control" id="body" aria-describedby="body" placeholder="Enter your comment here . . ." maxlength="255" rows="2" required></textarea>
+                            <textarea name="body" class="form-control" id="body" aria-describedby="body" placeholder="Enter your comment here . . ." maxlength="250" rows="2" required></textarea>
                         </div>
                         <input type="hidden" name="ideaId" th:value="${idea_details.id}">
 
