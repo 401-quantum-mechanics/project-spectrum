@@ -29,6 +29,7 @@ public class ApplicationUser implements UserDetails {
 // This is many to one for users to team up
   @ManyToMany(mappedBy = "team")
   Set<UserIdea> teamUpIdeas;
+
 //This is a many to many for a user to be able to like an idea
 @ManyToMany(mappedBy = "liking_users")
 Set<UserIdea> likedIdeas;

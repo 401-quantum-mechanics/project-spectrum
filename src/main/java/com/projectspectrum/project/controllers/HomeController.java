@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.security.Principal;
-import java.util.List;
+
 import java.util.Set;
 
 @Controller
@@ -29,6 +29,7 @@ public class HomeController {
   @GetMapping("/")
   public String getRoot(Principal p, Model m){
 
+//    TODO: turn this into a method, used in over three places.
     ApplicationUser applicationUser = null;
     if(p != null){
       applicationUser = applicationUserRepository.findByUsername(p.getName());
@@ -92,6 +93,7 @@ public class HomeController {
     if(p!=null){
       applicationUser = applicationUserRepository.findByUsername(p.getName());
     }
+
     m.addAttribute("user", applicationUser);
     return "aboutUs";
   }
@@ -103,7 +105,6 @@ public class HomeController {
     UserIdea userIdea = userIdeaRepository.findById(id);
     m.addAttribute("ideaDetails", userIdea);
 
-    System.out.println("$$$$$$$$$$$$ TEAM $$$$$$$$$$ " + userIdea.getTeam());
     m.addAttribute("team", userIdea.getTeam());
 
 

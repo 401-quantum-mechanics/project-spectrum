@@ -46,5 +46,6 @@ Project Spectrum is a repository for coding project suggestions. It allows users
   
   ## Resources
   * The interwebs.
+  * presentation examples for Jasper, Bob Mckinzie, and Bronco Billy came from https://www.codementor.io/npostolovski/40-side-project-ideas-for-software-engineers-g8xckyxef
   
   

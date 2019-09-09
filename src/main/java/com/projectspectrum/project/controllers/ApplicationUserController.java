@@ -1,9 +1,6 @@
 package com.projectspectrum.project.controllers;
 
-import com.projectspectrum.project.models.ApplicationUser;
-import com.projectspectrum.project.models.ApplicationUserRepository;
-import com.projectspectrum.project.models.UserIdea;
-import com.projectspectrum.project.models.UserIdeaRepository;
+import com.projectspectrum.project.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
