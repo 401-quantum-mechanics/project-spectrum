@@ -12,6 +12,7 @@ public class UserComment {
   public String body;
   public Date createdAt;
   public String name;
+
   @OneToOne
   ApplicationUser commenting_user;
 
@@ -28,10 +29,8 @@ public class UserComment {
     this.name = user.firstName;
   }
 
-  public UserComment(String body){
-    this.body = body;
-  }
-
+  public UserComment(){}
+//Getters
   public long getId() {
     return this.id;
   }
@@ -43,8 +42,6 @@ public class UserComment {
   public Date getCreatedAt() {
     return this.createdAt;
   }
-
-  public UserComment(){}
 
   public String  toString(){
     return String.format("On %tD, User %s in reference to %s posted: %s", this.createdAt, this.commenting_user.firstName,
@@ -59,10 +56,14 @@ public class UserComment {
     return target_idea;
   }
 
+  public String getName() {
+    return name;
+  }
+  //Setters
   public void setBody(String body) {
     this.body = body;
   }
-
+//For updated at
   public void setCreatedAt(Date createdAt) {
     this.createdAt = createdAt;
   }
@@ -71,8 +72,5 @@ public class UserComment {
     this.name = name;
   }
 
-  public String getName() {
-    return name;
-  }
 }
 

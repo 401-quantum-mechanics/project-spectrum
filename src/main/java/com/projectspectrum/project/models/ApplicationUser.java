@@ -20,24 +20,21 @@ public class ApplicationUser implements UserDetails {
   public String username;
 
 
-//  Database connections
-
 //  Ideas
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
   Set<UserIdea> userIdeaList;
 
-// This is many to one for users to team up
+// This is many to many for users to team up
   @ManyToMany(mappedBy = "team")
   Set<UserIdea> teamUpIdeas;
-//This is a many to many for a user to be able to like an idea
-@ManyToMany(mappedBy = "liking_users")
-Set<UserIdea> likedIdeas;
 
-//  // Comments
+//This is a many to many for a user to be able to like an idea
+  @ManyToMany(mappedBy = "liking_users")
+  Set<UserIdea> likedIdeas;
+
+  // Comments
   @OneToOne
   UserComment comment;
-
-
 
 //  class constructor
   public ApplicationUser(
@@ -74,7 +71,13 @@ Set<UserIdea> likedIdeas;
     return this.firstName;
   }
 
+  public String getLastName() {
+    return lastName;
+  }
 
+  public Set<UserIdea> getTeamUpIdeas() {
+    return teamUpIdeas;
+  }
 
 //  security protocols
   @Override
@@ -102,16 +105,4 @@ Set<UserIdea> likedIdeas;
     return true;
   }
 
-  public String getLastName() {
-    return lastName;
-  }
-
-  public Set<UserIdea> getUserIdeaList() {
-    return userIdeaList;
-  }
-
-
-  public Set<UserIdea> getTeamUpIdeas() {
-    return teamUpIdeas;
-  }
 }

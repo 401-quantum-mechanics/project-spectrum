@@ -16,52 +16,42 @@ public class UserIdea {
   public String info;
   public Date createAt;
 
-//@OneToOne
-//TeamUp team;
-
   @ManyToMany
   @JoinTable(
           // name is potato
           name="team_up",
-          // join columns: column where user like and idea
+          // join columns: column where ideas are teamed up on
           joinColumns = { @JoinColumn(name="idea_id") },
-          // inverse: column where ideas are liked
+          // inverse: column where user join team on an idea
           inverseJoinColumns = { @JoinColumn(name="user_joined_id") }
   )
-
   Set<ApplicationUser> team;
 
   @ManyToMany
   @JoinTable(
           // name is potato
           name="likes",
-          // join columns: column where user like and idea
+          // join columns column where ideas are liked
           joinColumns = { @JoinColumn(name="idea_id") },
-          // inverse: column where ideas are liked
+          // inverse: column where user like and idea
           inverseJoinColumns = { @JoinColumn(name="user_liking_idea_id") }
   )
   Set<ApplicationUser> liking_users;
 
 // List of comments on the idea
-@OneToMany(fetch = FetchType.EAGER, mappedBy = "target_idea")
-Set<UserComment> commentOnIdea;
-//  Database connections
-@ManyToOne
-ApplicationUser user;
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "target_idea")
+  Set<UserComment> commentOnIdea;
 
-//@OneToMany(fetch = FetchType.EAGER, mappedBy = "idea_liked")
-//Set<Like> users_liked;
-
+  @ManyToOne
+  ApplicationUser user;
 
 //  constructor
   public UserIdea(String title, String body, Date createAt,String info, ApplicationUser user) {
-    this.title     = title;
-    this.body      = body;
-    this.createAt  = createAt;
+    this.title = title;
+    this.body = body;
+    this.createAt = createAt;
     this.info = info;
     this.user = user;
-//    this.team = null;
-
   }
 
 //  empty constructor
@@ -102,11 +92,6 @@ ApplicationUser user;
     return liking_users;
   }
 
-  public void setCommentOnIdea(Set<UserComment> commentOnIdea) {
-    this.commentOnIdea = commentOnIdea;
-
-  }
-
   public Set<ApplicationUser> getTeam() {
     return team;
   }
@@ -119,6 +104,7 @@ ApplicationUser user;
   public void setTeam(ApplicationUser user) {
     this.team.add(user);
   }
+
   public void removeTeamMate(ApplicationUser user) {
     this.team.remove(user);
   }
@@ -151,7 +137,12 @@ ApplicationUser user;
     this.body = body;
   }
 
+  //User for when Idea is updated to display updated at
   public void setCreateAt(Date createAt) {
     this.createAt = createAt;
+  }
+
+  public void setInfo(String info) {
+    this.info = info;
   }
 }
