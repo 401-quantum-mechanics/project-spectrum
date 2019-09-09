@@ -23,12 +23,12 @@
                 <div class="px-4 pt-0 pb-0 profile-background">
                     <div class="media align-items-end profile-header">
                         <div class="mr-3">
-                            <img src="/user-icon.png" alt="User Icon"  width="200" class="mb-2 rounded-circle img-thumbnail">
+                            <img src="/profile-icon.png" alt="User Icon"  width="200" class="mb-2 rounded-circle img-thumbnail">
                             <a href="/idea" class="btn btn-primary btn-sm btn-block"><i class="fas fa-plus"></i> Add Idea</a>
                         </div>
                         <div class="media-body mb-5 text-white">
                             <h2 class="mt-0 mb-1" th:text="${user.firstName + ' ' + user.lastName}">Test User</h2>
-                            <h5 class="small mb-4"><i class="far fa-envelope"></i> <span th:text="${user.username}">email@email.com</span></h5>
+                            <h5 class="small mb-4"><i class="fas fa-envelope"></i> <span th:text="${user.username}">email@email.com</span></h5>
                         </div>
                     </div>
                 </div>
@@ -47,22 +47,28 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row profile-team-idea-row">
         <div class="col-sm-12 col-md-6">
             <div class="card shadow">
                 <h5 class="card-header"><i class="fas fa-users"></i> Team Ups</h5>
                 <div class="card-body">
-                    <ul class="list-group list-group-flush">
+                    <ul th:if="${teams.size() > 0}" class="list-group list-group-flush">
                         <span th:each="team : ${teams}" >
-                            <a  th:href="'/ideaPage/' + ${team.id}" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div></div>
+                                <a th:href="'/team/' + ${team.id}" class="list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h5 th:text="'Project: ' + ${team.title}" class="mb-1">Test 1</h5>
-                                    <small th:text="'Start Date: ' + ${team.createAt}">3 days ago</small>
+                                    <small th:text="${team.createAt}">3 days ago</small>
                                 </div>
                                 <p th:text="'Description: ' + ${team.body}" class="mb-1"></p>
                                 <small th:text="'Owner: ' + ${team.user.firstName}"></small>
                             </a>
                         </span>
+                    </ul>
+
+                    <ul th:unless="${teams.size() > 0}"
+                        class="list-group list-group-flush">
+                        <li class="list-group-item">No teams have been joined.</li>
                     </ul>
                 </div>
             </div>
@@ -70,8 +76,8 @@
 
         <div class="col-sm-12 col-md-6">
             <div class="card shadow">
-                <h5 class="card-header"><i class="far fa-lightbulb"></i> Ideas</h5>
-                <div class="card-body">
+                <h5 class="card-header"><i class="fas fa-lightbulb"></i> Ideas</h5>
+                <div class="card-body idea-card-body">
                     <ul th:if="${ideas}" class="list-group list-group-flush">
                         <span th:each="idea : ${ideas}">
                             <div class="text-right edit-link">
@@ -101,6 +107,11 @@
     </div>
 
 </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
 
 </body>
 </html>

@@ -2,15 +2,14 @@
 <html lang="en" xmlns:th="">
 
 <!-- Navigation -->
-<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow">
+<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow top-nav">
     <a class="navbar-brand" href="/">Project Spectrum</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent" th:if="${user}">
-        <span class="navbar-text" th:text="'Hi, ' + ${user.firstName}"></span>
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="/profile">Profile</a>
             </li>
@@ -18,7 +17,13 @@
                 <a class="nav-link" href="/ideas">Ideas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/aboutus">About</a>
+                <a class="nav-link" href="/aboutus">About Us</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item user-nav-item">
+                <a href="/profile"><i class="fas fa-user-circle text-primary"></i></a><small class="navbar-text" th:text="${user.username}"></small>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>

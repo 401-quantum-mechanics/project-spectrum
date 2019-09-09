@@ -67,5 +67,17 @@ public class ApplicationUserController {
   }
 
 
+    if(p!=null){
+      applicationUser = applicationUserRepository.findByUsername(p.getName());
+      userIdeas = applicationUserRepository.findByUsername(p.getName()).getIdeas();
+      userTeams = applicationUser.getTeamUpIdeas();
+
+    }
+    m.addAttribute("user", applicationUser);
+    m.addAttribute("ideas", userIdeas);
+    m.addAttribute("teams", userTeams);
+    return "profile";
+  }
+  
 
 }

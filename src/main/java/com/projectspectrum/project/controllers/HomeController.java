@@ -93,6 +93,7 @@ public class HomeController {
     return "aboutUs";
   }
 
+
   @GetMapping("/ideas")
   public String getListOfIdeas(Model model, Principal p) {
     ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
@@ -107,6 +108,27 @@ public class HomeController {
     ApplicationUser applicationUser = null;
     Set<UserIdea> userIdeas = null;
     Set<UserIdea> userTeams = null;
+
+  @GetMapping("/team/{id}")
+  public String getTeamPage(@PathVariable long id, Principal p, Model m) {
+    ApplicationUser applicationUser = null;
+
+    UserIdea userIdea = userIdeaRepository.findById(id);
+    m.addAttribute("ideaDetails", userIdea);
+
+    System.out.println("$$$$$$$$$$$$ TEAM $$$$$$$$$$ " + userIdea.getTeam());
+    m.addAttribute("team", userIdea.getTeam());
+
+
+
+    if(p!=null){
+      applicationUser = applicationUserRepository.findByUsername(p.getName());
+    }
+    m.addAttribute("user", applicationUser);
+    return "team";
+  }
+
+
 
     if(p!=null){
       applicationUser = applicationUserRepository.findByUsername(p.getName());

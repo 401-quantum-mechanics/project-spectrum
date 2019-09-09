@@ -14,16 +14,16 @@ public class UserCommentTest {
   ApplicationUser applicationUser = null;
 
 
-  @Before
-  public void setUp() throws Exception {
-
-    Date createdAt = new Date(System.currentTimeMillis());
-    applicationUser =  new ApplicationUser("Bill", "Ted", "Excellent","BandT@Excellent.Adveture.com");
-    userIdea = new UserIdea("What up Brah!", "Nothin, what up wich you?", createdAt, applicationUser);
-    String body = "a thing to do";
-
-    userComment = new UserComment(userIdea, body, createdAt, applicationUser);
-  }
+//  @Before
+//  public void setUp() throws Exception {
+//
+//    Date createdAt = new Date(System.currentTimeMillis());
+//    applicationUser =  new ApplicationUser("Bill", "Ted", "Excellent","BandT@Excellent.Adveture.com");
+//    userIdea = new UserIdea("What up Brah!", "Nothin, what up wich you?", createdAt, applicationUser);
+//    String body = "a thing to do";
+//
+//    userComment = new UserComment(userIdea, body, createdAt, applicationUser);
+//  }
 
   @Test
   public void testGetId() {

@@ -10,50 +10,83 @@
 <div th:replace="fragments/nav :: nav"></div>
 
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-sm-6 offset-sm-3 text-center page-title">
             <h1>About Us</h1>
             <hr>
         </div>
+        <div class="col-sm-6 offset-sm-3 text-center">
+            <p class="mx-auto mb-5">Welcome to <strong>Project Spectrum</strong>!  Our team was having trouble coming up with a project idea so we decided to build an app that could solve this problem.  We created an app that gives logged in users the ability to share, comment, like, and team up on web development ideas.  Here is the team of developers that made this happen.</p>
+        </div>
     </div>
 
-    <div class="row">
-        <div class="col-sm-4 mb-4">
-            <div class="card border-0 shadow">
-                <img src="/images/fabian.jpg" width="500" height="350" class="card-img-top" alt="...">
-                <div class="card-body text-center">
-                    <h5 class="card-title mb-0">Fabian "Here's Johnny" Brooks</h5>
-                    <div class="card-text text-black-50">After an extended stay in an intense coding boot camp Fabian "Here's Johnny" Brooks
-                        took to programming like a sharp axe to a door. Chopping data up into byte sized pieces
-                        to feed his coding fever.</div>
+    <div class="row team shadow">
+        <div class="col">
+            <div class="text-center">
+
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="text-center">
+                            <img src="/images/fabian.png" class="rounded-circle shadow img-thumbnail"
+                                 alt="fabian">
+                        </div>
+                        <h5 class="font-weight-bold">Fabian "Here's Johnny" Brooks</h5>
+                        <p class="text-uppercase text-primary"><strong>Software Developer</strong></p>
+                        <p class="text-body">After an extended stay in an intense coding boot camp Fabian "Here's Johnny" Brooks
+                            took to programming like a sharp axe to a door. Chopping data up into byte sized pieces
+                            to feed his coding fever.</p>
+                        <ul class="list-unstyled">
+                            <a href="#">
+                                <i class="fab fa-github-square"></i>
+                            </a>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="text-center">
+                            <img src="/images/matt.png" class="rounded-circle shadow img-thumbnail"
+                                 alt="matt">
+                        </div>
+                        <h5 class="font-weight-bold">Matt "Come at me Brah!" Stuhring</h5>
+                        <p class="text-uppercase text-primary"><strong>Software Developer</strong></p>
+                        <p class="text-body">If you're looking for someone to Man Up on your code look no further. Coming from the hard streets of
+                            Java Matt "Come at me Brah!" Stuhring has a reputation for code stomping applications into
+                            compliance. Don't let the smile fool you behind those warm kind eyes lies the heart of a codeblooded
+                            programmer.</p>
+
+                        <ul class="list-unstyled">
+                            <a href="#">
+                                <i class="fab fa-github-alt"></i>
+                            </a>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="text-center">
+                            <img src="/images/travis2.png" class="rounded-circle shadow img-thumbnail"
+                                 alt="travis">
+                        </div>
+                        <h5 class="font-weight-bold">Travis "Cookie Monster" Cox</h5>
+                        <p class="text-uppercase text-primary"><strong>Software Developer</strong></p>
+                        <p class="text-body">A consummate code baker Travis "Cookie Monster" Cox lives to take it up a notch. Frequently heard
+                            shouting "BAM!" and "COOOKIES!" he prefers the baked in goodness of a strongly typed script. His
+                            only complaint is having to wait for his laptop to cool down before sampling his creations.</p>
+                        <ul class="list-unstyled">
+                            <a href="#">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </ul>
+                    </div>
+
                 </div>
+
             </div>
-        </div>
-        <div class="col-sm-4 mb-4">
-            <div class="card border-0 shadow">
-                <img src="/images/matt.png" width="500" height="350" class="card-img-top" alt="...">
-                <div class="card-body text-center">
-                    <h5 class="card-title mb-0">Matt "Come at me Brah!" Stuhring</h5>
-                    <div class="card-text text-black-50">If your looking for someone to Man Up on your code look no further. Coming from the hard streets of
-                        Java Matt "Come at me Brah!" Stuhring has a reputation for code stomping applications into
-                        compliance. Don't let the smile fool you behind those warm kind eyes lies the heart of a codeblooded
-                        programmer.</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 mb-4">
-            <div class="card border-0 shadow">
-                <img src="/images/travis2.jpg" width="500" height="350" class="card-img-top" alt="...">
-                <div class="card-body text-center">
-                    <h5 class="card-title mb-0">Travis "Cookie Monster" Cox</h5>
-                    <div class="card-text text-black-50">A consummate code baker Travis "Cookie Monster" Cox lives to take it up a notch. Frequently heard
-                        shouting "BAM!" and "COOOKIES!" he prefers the baked in goodness of a strongly typed script. His
-                        only complaint is having to wait for his laptop to cool down before sampling his creations.</div>
-                </div>
-            </div>
+
         </div>
     </div>
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

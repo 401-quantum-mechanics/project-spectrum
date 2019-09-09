@@ -18,7 +18,8 @@ public class UserIdeaTest {
 
     Date createdAt = new Date(System.currentTimeMillis());
     applicationUser =  new ApplicationUser("Bill", "Ted", "Excellent","BandT@Excellent.Adveture.com");
-    userIdea = new UserIdea("What up Brah!", "Nothin, what up wich you?", createdAt, applicationUser);
+    new UserIdea();
+    userIdea = new UserIdea("What up Brah!", "Nothin, what up wich you?", createdAt, "Not much", applicationUser);
 
   }
 
@@ -40,7 +41,7 @@ public class UserIdeaTest {
 
   @Test
   public void testGetCreateAt() {
-    assertEquals("testGetCreateAt equals", "2019-09-04", userIdea.getCreateAt().toString());
+    assertEquals("testGetCreateAt equals", java.time.LocalDate.now().toString(), userIdea.getCreateAt().toString());
   }
 
   @Test
