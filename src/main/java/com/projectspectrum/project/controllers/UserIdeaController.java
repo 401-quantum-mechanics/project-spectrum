@@ -36,15 +36,6 @@ public class UserIdeaController {
         return new RedirectView("profile");
     }
 
-    @GetMapping("/ideas")
-    public String getListOfIdeas(Model model, Principal p) {
-        ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
-        model.addAttribute("user", applicationUser);
-        List<UserIdea> ideasList = userIdeaRepository.findAll();
-        model.addAttribute("ideas", ideasList);
-        return "allIdeas";
-    }
-
     @GetMapping("/ideaPage/{id}")
     public String getIdeaDetails(@PathVariable long id, Model model, Principal p) {
         UserIdea userIdea = userIdeaRepository.findById(id);
@@ -61,6 +52,7 @@ public class UserIdeaController {
 
         ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
         model.addAttribute("user", applicationUser);
+
         if (userIdea.getTeam().contains(applicationUser)) {
             model.addAttribute("team", userIdea.getTeam());
         }
@@ -99,7 +91,6 @@ public class UserIdeaController {
         UserComment userComment = new UserComment(userIdea, body, date, fullUser);
         userCommentRepository.save(userComment);
         return new RedirectView("/ideaPage/" + ideaId);
-
     }
 
     @GetMapping("/likeIdea/{id}")
@@ -107,7 +98,6 @@ public class UserIdeaController {
 
         UserIdea userIdea = userIdeaRepository.findById(id);
         ApplicationUser user = applicationUserRepository.findByUsername(principal.getName());
-        System.out.println(user.firstName);
         if (!userIdea.getLiking_users().contains(user)) {
             userIdea.setLiking_users(user);
         } else {
@@ -119,19 +109,22 @@ public class UserIdeaController {
     }
 
     @PostMapping("/ideaUpdate")
-    public RedirectView updatingIdea(long ideaId, String body, String title){
+    public RedirectView updatingIdea(long ideaId, String body, String title, String info){
         UserIdea userIdea = userIdeaRepository.findById(ideaId);
         userIdea.setTitle(title);
         userIdea.setBody(body);
+        userIdea.setInfo(info);
         userIdeaRepository.save(userIdea);
         return new RedirectView("/profile");
     }
+
     @PostMapping("/ideaDelete")
     public RedirectView deleteIdea(long ideaId){
         UserIdea userIdea = userIdeaRepository.findById(ideaId);
         userIdeaRepository.delete(userIdea);
         return new RedirectView("/profile");
     }
+
     @PostMapping("/commentUpdate")
     public RedirectView updateComment(long commentId, long ideaId, String body){
         UserComment userComment = userCommentRepository.findById(commentId);
@@ -139,6 +132,7 @@ public class UserIdeaController {
         userCommentRepository.save(userComment);
         return new RedirectView("/ideaPage/" + ideaId);
     }
+
     @GetMapping("/commentDelete/{commentId}")
     public RedirectView deleteComment(@PathVariable long commentId){
         UserComment userComment = userCommentRepository.findById(commentId);

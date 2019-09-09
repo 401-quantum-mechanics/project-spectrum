@@ -33,7 +33,6 @@ public class HomeController {
     if(p != null){
       applicationUser = applicationUserRepository.findByUsername(p.getName());
     }
-
     m.addAttribute("user", applicationUser);
 
     return "home";
@@ -47,7 +46,6 @@ public class HomeController {
       applicationUser = applicationUserRepository.findByUsername(p.getName());
     }
     m.addAttribute("user", applicationUser);
-
 
     return "ideaForm";
   }
@@ -79,7 +77,6 @@ public class HomeController {
     if(p!=null){
       applicationUser = applicationUserRepository.findByUsername(p.getName());
     }
-
     m.addAttribute("user", applicationUser);
 
     return "ideaUpdate";
@@ -95,6 +92,22 @@ public class HomeController {
     m.addAttribute("user", applicationUser);
     return "aboutUs";
   }
+
+
+  @GetMapping("/ideas")
+  public String getListOfIdeas(Model model, Principal p) {
+    ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
+    model.addAttribute("user", applicationUser);
+    List<UserIdea> ideasList = userIdeaRepository.findAll();
+    model.addAttribute("ideas", ideasList);
+    return "allIdeas";
+  }
+
+  @GetMapping("/profile")
+  public String getProfile(Principal p, Model m){
+    ApplicationUser applicationUser = null;
+    Set<UserIdea> userIdeas = null;
+    Set<UserIdea> userTeams = null;
 
   @GetMapping("/team/{id}")
   public String getTeamPage(@PathVariable long id, Principal p, Model m) {
@@ -116,4 +129,15 @@ public class HomeController {
   }
 
 
+
+    if(p!=null){
+      applicationUser = applicationUserRepository.findByUsername(p.getName());
+      userIdeas = applicationUserRepository.findByUsername(p.getName()).getIdeas();
+      userTeams = applicationUser.getTeamUpIdeas();
+    }
+    m.addAttribute("user", applicationUser);
+    m.addAttribute("ideas", userIdeas);
+    m.addAttribute("teams", userTeams);
+    return "profile";
+  }
 }

@@ -34,7 +34,6 @@ public class ApplicationUserController {
 
   @GetMapping("/login")
   public String getLoginPage(Principal p, Model m) {
-
     ApplicationUser applicationUser = null;
 
     if(p!=null){
@@ -60,21 +59,13 @@ public class ApplicationUserController {
     if(applicationUser!=null){
       return new RedirectView("/login");
     } else {
-
-
     applicationUserRepository.save(newUser);
     Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
-
-    SecurityContextHolder.getContext().setAuthentication(authentication);//
+    SecurityContextHolder.getContext().setAuthentication(authentication);
 
     return new RedirectView("/profile");}
   }
 
-  @GetMapping("/profile")
-  public String getProfile(Principal p, Model m){
-    ApplicationUser applicationUser = null;
-    Set<UserIdea> userIdeas = null;
-    Set<UserIdea> userTeams = null;
 
     if(p!=null){
       applicationUser = applicationUserRepository.findByUsername(p.getName());
