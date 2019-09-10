@@ -12,6 +12,7 @@ public class UserComment {
   public String body;
   public Date createdAt;
   public String name;
+  // this is a many-to-one relationship! a user might have many comments!
   @OneToOne
   ApplicationUser commenting_user;
 

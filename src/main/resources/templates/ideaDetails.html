@@ -37,6 +37,8 @@
                                 </a>
                             </span>
                         </div>
+                        <!-- It confuses me that the top of a team page is the information about the user who created the idea.
+                        That user may not even be on the team anymore; shouldn't the name/description of the idea take priority? -->
                         <div class="media-body mb-5 text-white">
                             <h2 class="mt-0 mb-1" th:text="${ideaUser.firstName + ' ' + ideaUser.lastName}">Test User</h2>
                             <h5 class="small mb-4"><i class="fas fa-envelope"></i> <span th:text="${ideaUser.username}">email@email.com</span></h5>

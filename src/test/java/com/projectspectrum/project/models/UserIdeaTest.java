@@ -41,6 +41,8 @@ public class UserIdeaTest {
 
   @Test
   public void testGetCreateAt() {
+    // if this test happens to be run right at midnight, this will fail!
+    // better to save now in a variable during the @before for testing purposes.
     assertEquals("testGetCreateAt equals", java.time.LocalDate.now().toString(), userIdea.getCreateAt().toString());
   }
 

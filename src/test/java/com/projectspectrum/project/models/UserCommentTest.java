@@ -14,16 +14,18 @@ public class UserCommentTest {
   ApplicationUser applicationUser = null;
 
 
-//  @Before
-//  public void setUp() throws Exception {
-//
-//    Date createdAt = new Date(System.currentTimeMillis());
-//    applicationUser =  new ApplicationUser("Bill", "Ted", "Excellent","BandT@Excellent.Adveture.com");
-//    userIdea = new UserIdea("What up Brah!", "Nothin, what up wich you?", createdAt, applicationUser);
-//    String body = "a thing to do";
-//
-//    userComment = new UserComment(userIdea, body, createdAt, applicationUser);
-//  }
+  // why is this commented out? It breaks your tests!
+
+  @Before
+  public void setUp() throws Exception {
+
+    Date createdAt = new Date(System.currentTimeMillis());
+    applicationUser =  new ApplicationUser("Bill", "Ted", "Excellent","BandT@Excellent.Adveture.com");
+    userIdea = new UserIdea("What up Brah!", "Nothin, what up wich you?", createdAt, "more info", applicationUser);
+    String body = "a thing to do";
+
+    userComment = new UserComment(userIdea, body, createdAt, applicationUser);
+  }
 
   @Test
   public void testGetId() {
@@ -51,7 +53,10 @@ public class UserCommentTest {
 
   @Test
   public void testGetTarget_idea() {
-    assertEquals("testGetTarget_idea equals.", "Project What up Brah!: Nothin, what up wich you? ; Created By: Ted, Created On 09/04/19",
-                 userComment.getTarget_idea().toString());
+    // woah, this test is asserting that it's being run on a particular day!!!
+    // At minimum, this should not care about the last part of the string;
+    // ideally, it should save the date/time when it was created as a variable in this test for comparison.
+    assertTrue("testGetTarget_idea equals.",
+                 userComment.getTarget_idea().toString().startsWith("Project What up Brah!: Nothin, what up wich you? ; Created By: Ted, Created On"));
   }
 }

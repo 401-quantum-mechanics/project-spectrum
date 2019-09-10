@@ -54,10 +54,14 @@
                 <div class="card-body">
                     <ul th:if="${teams.size() > 0}" class="list-group list-group-flush">
                         <span th:each="team : ${teams}" >
+                            <!-- It's weird that this links to a team page that doesn't allow you to leave the team
+                            or see what the idea for a project is. I would prefer linking to the project page here,
+                            and displaying the team members there; I don't think you need a team page at all. -->
                             <div></div>
                                 <a th:href="'/team/' + ${team.id}" class="list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h5 th:text="'Project: ' + ${team.title}" class="mb-1">Test 1</h5>
+                                    <!-- nitpick: small isn't very semantic HTML, that's what CSS is for! -->
                                     <small th:text="${team.createAt}">3 days ago</small>
                                 </div>
                                 <p th:text="'Description: ' + ${team.body}" class="mb-1"></p>

@@ -18,6 +18,7 @@
         </div>
     </div>
 
+    <!-- You should really cite the Bootstrap documentation at some point, if you're going to leave their HTML in your page! -->
     <div class="row text-center text-lg-left">
         <div th:each="idea : ${ideas}" class="col-lg-4 col-md-6 col-sm-12 mb-4">
             <a th:href="'/ideaPage/' + ${idea.id}" class="idea-container">
