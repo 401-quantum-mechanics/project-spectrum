@@ -18,6 +18,7 @@ public class ApplicationUserTest {
 
   @Test
   public void testGetId() {
+    // array with one item? this seems like a leftover test message :(
     assertEquals("testGetId on array with one item equals 0.", 0, applicationUser.getId());
   }
 
