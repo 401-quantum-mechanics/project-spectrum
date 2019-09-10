@@ -14,6 +14,7 @@ public class UserIdea {
   public String title;
   public String body;
   public String info;
+  // nitpick: should probably be createdAt
   public Date createAt;
 
 //@OneToOne
@@ -49,8 +50,7 @@ Set<UserComment> commentOnIdea;
 @ManyToOne
 ApplicationUser user;
 
-//@OneToMany(fetch = FetchType.EAGER, mappedBy = "idea_liked")
-//Set<Like> users_liked;
+// oh no! leftover commented-out code!
 
 
 //  constructor
@@ -60,7 +60,6 @@ ApplicationUser user;
     this.createAt  = createAt;
     this.info = info;
     this.user = user;
-//    this.team = null;
 
   }
 

@@ -34,6 +34,7 @@ public class ApplicationUser implements UserDetails {
 Set<UserIdea> likedIdeas;
 
 //  // Comments
+  // A user should be able to have many comments!
   @OneToOne
   UserComment comment;
 

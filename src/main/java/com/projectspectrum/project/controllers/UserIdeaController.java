@@ -102,6 +102,8 @@ public class UserIdeaController {
 
     }
 
+    // Never use a get request for something that changes the server!
+    // See https://twitter.com/rombulow/status/990684453734203392?lang=en
     @GetMapping("/likeIdea/{id}")
     public RedirectView likeIdea(@PathVariable long id, Principal principal, Model model) {
 
@@ -118,6 +120,8 @@ public class UserIdeaController {
         return new RedirectView("/ideaPage/" + id);
     }
 
+    // This doesn't check that the logged in user actually owns that idea!
+    // I can edit other users' ideas because of this.
     @PostMapping("/ideaUpdate")
     public RedirectView updatingIdea(long ideaId, String body, String title){
         UserIdea userIdea = userIdeaRepository.findById(ideaId);
@@ -126,6 +130,7 @@ public class UserIdeaController {
         userIdeaRepository.save(userIdea);
         return new RedirectView("/profile");
     }
+    // Again, this will let me delete ANY idea if I make a post request to the right link.
     @PostMapping("/ideaDelete")
     public RedirectView deleteIdea(long ideaId){
         UserIdea userIdea = userIdeaRepository.findById(ideaId);

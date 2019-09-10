@@ -76,9 +76,10 @@ public class ApplicationUserController {
     Set<UserIdea> userIdeas = null;
     Set<UserIdea> userTeams = null;
 
+    // Since users have to be authenticated to view this page, you don't have to be as careful with the principal.
     if(p!=null){
       applicationUser = applicationUserRepository.findByUsername(p.getName());
-      userIdeas = applicationUserRepository.findByUsername(p.getName()).getIdeas();
+      userIdeas = applicationUser.getIdeas();
       userTeams = applicationUser.getTeamUpIdeas();
 
     }

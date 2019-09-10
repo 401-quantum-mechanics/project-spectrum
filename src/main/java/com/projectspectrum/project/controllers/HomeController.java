@@ -39,8 +39,10 @@ public class HomeController {
     return "home";
   }
 
+  // This probably belongs in another controller, as do all the other routes below here!
   @GetMapping("/idea")
   public String getIdeaFormPage(Principal p, Model m) {
+    // the copy-pasta here is strong! You really want to make this a helper method.
     ApplicationUser applicationUser = null;
 
     if(p!=null){
