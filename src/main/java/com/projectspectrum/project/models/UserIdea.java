@@ -5,6 +5,18 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+
+
+// COMMENTS
+// -------------------
+// Add more comments explaining why these relationships were used
+// Think about creating an ERD which would really help visually explain the schema
+// Organize getters and setters!!!
+// Clean up dead code
+// Think about better naming conventions for tables
+
+
+
 @Entity
 public class UserIdea {
 
