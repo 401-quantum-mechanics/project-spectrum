@@ -12,6 +12,7 @@ public class UserComment {
   public String body;
   public Date createdAt;
   public String name;
+
   @OneToOne
   ApplicationUser commenting_user;
 

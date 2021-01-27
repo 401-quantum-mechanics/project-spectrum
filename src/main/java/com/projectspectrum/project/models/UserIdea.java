@@ -19,6 +19,7 @@ public class UserIdea {
 //@OneToOne
 //TeamUp team;
 
+//  TODO: REMOVE THIS RELATIONSHIP REPLACE WITH SINGLE LIST OF USER ID'S THAT'S OWNED BY THE IDEA.
   @ManyToMany
   @JoinTable(
           // name is potato
